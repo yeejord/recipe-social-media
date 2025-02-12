@@ -1,4 +1,5 @@
 import { Button, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function ProfileBottomBar() {
   return (
@@ -15,9 +16,9 @@ export default function ProfileBottomBar() {
         <Button variant="danger" className="m-3" size="lg">
           Sign out
         </Button>
-        <Button variant="warning" className="m-3" size="lg">
+        <Link className="btn btn-warning btn-lg m-3" to="/Profile/Edit">
           Edit
-        </Button>
+        </Link>
       </div>
     </Row>
   );
