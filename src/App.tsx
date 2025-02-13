@@ -3,11 +3,17 @@ import Profile from "./Profile";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import RecipeList from "./RecipeList";
+import NewRecipe from "./New Recipe";
+import Feed from "./Feed";
+import Navigation from "./Navigation";
+import "./App.css";
 
 export default function App() {
   return (
     <HashRouter>
-      <div>
+      <div id="rs-App">
+        <Navigation />
+        <div className="rs-main-content-offset p-5">
         <Routes>
           {/* Temporary Routes */}
           <Route path="/" element={<Navigate to="/Signin" />} />
@@ -15,7 +21,10 @@ export default function App() {
           <Route path="/Signin" element={<Signin />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/RecipeList" element={<RecipeList />} />
+          <Route path="/Feed" element={<Feed />} />
+          <Route path="/NewRecipe" element={<NewRecipe />} />
         </Routes>
+      </div>
       </div>
     </HashRouter>
   );
