@@ -3,6 +3,7 @@ import ProfileBasicInfoEditor from "./ProfileBasicInfoEditor";
 import BioEditor from "./BioEditor";
 import AllergiesSelector from "./AllergiesSelector";
 import PreferencesSelector from "./PreferenceSelector";
+import ProfileEditorBottomBar from "./ProfileEditorBottomBar";
 
 export default function ProfileEditor() {
   return (
@@ -10,24 +11,14 @@ export default function ProfileEditor() {
       <Row id="recipe-profile-main">
         <Col md={4}>
           <ProfileBasicInfoEditor />
-          <Row>
-            <div className="d-flex flex-row justify-content-around m-3">
-              <Button size="lg" disabled>
-                Following
-              </Button>
-              <Button size="lg" disabled>
-                Followers
-              </Button>
-            </div>
-          </Row>
         </Col>
         <Col md={8}>
           <Row>
-            <div className="d-flex flex-row justify-content-around m-3">
-              <Button size="lg" disabled>
+            <div className="d-flex flex-row justify-content-around mt-3">
+              <Button size="lg" disabled variant="outline-primary">
                 Favorite Posts
               </Button>
-              <Button size="lg" disabled>
+              <Button size="lg" disabled variant="outline-primary">
                 My Posts
               </Button>
             </div>
@@ -39,6 +30,7 @@ export default function ProfileEditor() {
           </Row>
         </Col>
       </Row>
+      <ProfileEditorBottomBar />
     </div>
   );
 }

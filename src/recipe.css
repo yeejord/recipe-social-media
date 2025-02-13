@@ -11,10 +11,10 @@
 }
 
 .profile-image {
-  border: 2rem;
-  padding: 2rem;
-  border-style: groove;
-  border-color: rgb(30, 126, 70);
+  border: 1rem;
+  padding: 2%;
+  border-style: double solid;
+  border-color: rgb(0, 0, 0);
 }
 
 .recipe-profile-badge {
@@ -26,9 +26,18 @@
   padding: 1em;
 }
 
+.recipe-profile-nav {
+  background-color: rgba(0, 255, 255, 0.361);
+}
+
+.recipe-user-card {
+  margin: 5px;
+}
+
 #recipe-profile-bottom {
-  position: fixed;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  background-color: rgba(0, 255, 255, 0.361);
+}
+
+#app {
+  padding: 1em;
 }

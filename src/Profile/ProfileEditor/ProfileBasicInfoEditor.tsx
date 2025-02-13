@@ -5,10 +5,20 @@ export default function ProfileBasicInfoEditor() {
     <div id="recipe-profile-basic-info">
       <Row>
         <div className="profile-card-holder">
-          <Card>
+          <Card className="p-2">
+            <InputGroup className="mb-3" size="lg">
+              <Form.Control
+                placeholder="Name"
+                aria-label="Name"
+                defaultValue={"Name"}
+              />
+            </InputGroup>
             <InputGroup className="mb-3">
-              <Form.Control placeholder="Name" aria-label="Name" />
-              <Form.Control placeholder="Username" aria-label="Username" />
+              <Form.Control
+                placeholder="Username"
+                aria-label="Username"
+                defaultValue={"username"}
+              />
             </InputGroup>
           </Card>
         </div>
@@ -16,6 +26,7 @@ export default function ProfileBasicInfoEditor() {
       <Row className="profile-image-holder">
         <Image
           src="../../images/DetectiveClock.png"
+          fluid
           roundedCircle
           className="profile-image bg-primary"
           id="recipe-profile-basic-info-image"

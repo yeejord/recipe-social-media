@@ -18,6 +18,7 @@ export default function ProfileBasicInfo() {
       <Row className="profile-image-holder">
         <Image
           src="../../images/DetectiveClock.png"
+          fluid
           roundedCircle
           className="profile-image bg-primary"
           id="recipe-profile-basic-info-image"

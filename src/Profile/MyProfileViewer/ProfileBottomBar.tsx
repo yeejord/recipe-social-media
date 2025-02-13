@@ -4,18 +4,13 @@ import { Link } from "react-router-dom";
 export default function ProfileBottomBar() {
   return (
     <Row>
-      {/* Breaks so that the content can fully scroll */}
-      <br />
-      <br />
-      <br />
-      {/* bottom buttons */}
       <div
         id="recipe-profile-bottom"
-        className="d-flex flex-row justify-content-between m-3 bg-secondary"
+        className="d-flex flex-row justify-content-between m-3"
       >
-        <Button variant="danger" className="m-3" size="lg">
+        <Link className="btn btn-danger btn-lg m-3" to="/Signin">
           Sign out
-        </Button>
+        </Link>
         <Link className="btn btn-warning btn-lg m-3" to="/Profile/Edit">
           Edit
         </Link>
