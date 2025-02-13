@@ -1,0 +1,43 @@
+#recipe-profile-name {
+  font-size: 4em;
+}
+
+#recipe-profile-username {
+  font-size: 2em;
+}
+
+.profile-image-holder {
+  padding: 1em;
+}
+
+.profile-image {
+  border: 1rem;
+  padding: 2%;
+  border-style: double solid;
+  border-color: rgb(0, 0, 0);
+}
+
+.recipe-profile-badge {
+  font-size: large;
+  margin: 5px;
+}
+
+.profile-card-holder {
+  padding: 1em;
+}
+
+.recipe-profile-nav {
+  background-color: rgba(0, 255, 255, 0.361);
+}
+
+.recipe-user-card {
+  margin: 5px;
+}
+
+#recipe-profile-bottom {
+  background-color: rgba(0, 255, 255, 0.361);
+}
+
+#app {
+  padding: 1em;
+}
