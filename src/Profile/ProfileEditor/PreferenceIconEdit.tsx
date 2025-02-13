@@ -1,4 +1,4 @@
-import { Badge, Button } from "react-bootstrap";
+import { Badge } from "react-bootstrap";
 import { IoIosCloseCircle } from "react-icons/io";
 
 export default function PreferenceIconEdit(props: {
