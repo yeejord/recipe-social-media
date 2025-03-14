@@ -7,13 +7,12 @@ import OtherProfile from "./OtherProfile";
 import NewRecipe from "./New Recipe";
 import Feed from "./Feed";
 import Navigation from "./Navigation";
-import "./App.css";
 
 export default function App() {
   return (
     <HashRouter>
       <div id="rs-App">
-        <Navigation />
+        <Navigation z-index={5} />
         <div className="rs-main-content-offset p-5">
           <Routes>
             {/* Temporary Routes */}

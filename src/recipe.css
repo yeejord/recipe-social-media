@@ -1,3 +1,7 @@
+#rs-navigation {
+  z-index: 5;
+}
+
 #recipe-signin {
   margin: auto;
   width: fit-content;
@@ -38,6 +42,13 @@
   border-color: rgb(0, 0, 0);
   background-color: rgba(7, 0, 63, 0.897);
   opacity: 0.5;
+}
+
+.selector-dropdown {
+  padding: 0;
+}
+.selector-dropdown:after {
+  content: none;
 }
 
 .image-edit-cam {
