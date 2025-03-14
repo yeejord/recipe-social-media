@@ -1,48 +1,46 @@
 import { Col, Row } from "react-bootstrap";
-import RecipeCard from "./RecipeCard";
+import UserCard from "./UserCard";
+import ProfileNavigation from "../Profile/ProfileNavigation";
 
-export default function RecipeList() {
+export default function UserList() {
   return (
-    <div id="recipe-recipe-card-list">
+    <div id="recipe-user-card-list">
       <Row>
         <Col md={6}>
-          <RecipeCard />
+          <UserCard />
         </Col>
         <Col md={6}>
-          <RecipeCard />
+          <UserCard />
         </Col>
         <Col md={6}>
-          <RecipeCard />
+          <UserCard />
         </Col>
         <Col md={6}>
-          <RecipeCard />
+          <UserCard />
         </Col>
         <Col md={6}>
-          <RecipeCard />
+          <UserCard />
         </Col>
         <Col md={6}>
-          <RecipeCard />
+          <UserCard />
         </Col>
         <Col md={6}>
-          <RecipeCard />
+          <UserCard />
         </Col>
         <Col md={6}>
-          <RecipeCard />
+          <UserCard />
         </Col>
         <Col md={6}>
-          <RecipeCard />
+          <UserCard />
         </Col>
         <Col md={6}>
-          <RecipeCard />
+          <UserCard />
         </Col>
         <Col md={6}>
-          <RecipeCard />
+          <UserCard />
         </Col>
         <Col md={6}>
-          <RecipeCard />
-        </Col>
-        <Col md={6}>
-          <RecipeCard />
+          <UserCard />
         </Col>
       </Row>
       {/* Repeated any num of times */}

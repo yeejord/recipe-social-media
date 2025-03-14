@@ -1,60 +1,23 @@
-import { Col, Row, Image, Card, Button } from "react-bootstrap";
-import AllergiesSelector from "./AllergiesSelector";
-import PreferencesSelector from "./PreferenceSelector";
+import { Navigate, Route, Routes } from "react-router-dom";
+import MyProfileViewer from "./MyProfileViewer";
+import ProfileEditor from "./ProfileEditor";
+import UserList from "../UserList";
+import ProfileNavigation from "./ProfileNavigation";
+import RecipeList from "../RecipeList";
 
 export default function Profile() {
   return (
-    <div id="recipe-profile">
-      <h1>Profile</h1>
-      <Image src="../../public/images/DetectiveClock.png" roundedCircle />
-      <Card>
-        <Card.Title>Profile</Card.Title>
-        {/* All account attributes */}
-        <Row>
-          <Col>
-            <p className="float-end">Username:</p>
-          </Col>
-          <Col>Something</Col>
-        </Row>
-        <Row>
-          <Col>
-            <p className="float-end">Name:</p>
-          </Col>
-          <Col>Name Here</Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button variant="secondary" className="float-end">
-              Favorites
-            </Button>
-          </Col>
-          <Col>
-            <Button variant="secondary">My Posts</Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button variant="secondary" className="float-end">
-              Following
-            </Button>
-          </Col>
-          <Col>
-            <Button variant="secondary">Followers</Button>
-          </Col>
-        </Row>
-        <AllergiesSelector />
-        <PreferencesSelector />
-        <Row>
-          <Col>
-            <Button variant="warning" className="float-end">
-              Edit
-            </Button>
-          </Col>
-          <Col>
-            <Button variant="danger">Signout</Button>
-          </Col>
-        </Row>
-      </Card>
+    <div>
+      <ProfileNavigation />
+      <Routes>
+        <Route path="" element={<Navigate to="View" />} />
+        <Route path="View" element={<MyProfileViewer />} />
+        <Route path="Edit" element={<ProfileEditor />} />
+        <Route path="Followers" element={<UserList />} />
+        <Route path="Following" element={<UserList />} />
+        <Route path="Favorites" element={<RecipeList />} />
+        <Route path="MyPosts" element={<RecipeList />} />
+      </Routes>
     </div>
   );
 }
