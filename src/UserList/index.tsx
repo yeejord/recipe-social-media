@@ -1,49 +1,17 @@
 import { Col, Row } from "react-bootstrap";
 import UserCard from "./UserCard";
-import ProfileNavigation from "../Profile/ProfileNavigation";
+import { User } from "../Types/Types";
 
-export default function UserList() {
+export default function UserList({ users }: { users: User[] }) {
   return (
     <div id="recipe-user-card-list">
       <Row>
-        <Col md={6}>
-          <UserCard />
-        </Col>
-        <Col md={6}>
-          <UserCard />
-        </Col>
-        <Col md={6}>
-          <UserCard />
-        </Col>
-        <Col md={6}>
-          <UserCard />
-        </Col>
-        <Col md={6}>
-          <UserCard />
-        </Col>
-        <Col md={6}>
-          <UserCard />
-        </Col>
-        <Col md={6}>
-          <UserCard />
-        </Col>
-        <Col md={6}>
-          <UserCard />
-        </Col>
-        <Col md={6}>
-          <UserCard />
-        </Col>
-        <Col md={6}>
-          <UserCard />
-        </Col>
-        <Col md={6}>
-          <UserCard />
-        </Col>
-        <Col md={6}>
-          <UserCard />
-        </Col>
+        {users.map((user) => (
+          <Col md={6}>
+            <UserCard user={user} />
+          </Col>
+        ))}
       </Row>
-      {/* Repeated any num of times */}
     </div>
   );
 }
