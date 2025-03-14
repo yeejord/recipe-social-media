@@ -25,7 +25,6 @@ export default function Signup() {
       >
         Sign up
       </Link>
-    <div>
       <h1>New here?</h1>
       <div id="recipe-signup">
         <h3>Sign up</h3>
@@ -60,7 +59,7 @@ export default function Signup() {
         >
           Sign up
         </Link>
-
+      </div>
       <br />
       <Link to="/Signin" id="recipe-signup-link">
         Sign in
