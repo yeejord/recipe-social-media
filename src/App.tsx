@@ -18,7 +18,7 @@ export default function App() {
             {/* Temporary Routes */}
             <Route path="/" element={<Navigate to="/Signin" />} />
             <Route path="/Profile/*" element={<Profile />} />
-            <Route path="/OtherProfile/*" element={<OtherProfile />} />
+            <Route path="/OtherProfile/:userid/*" element={<OtherProfile />} />
             <Route path="/Signin" element={<Signin />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/RecipeList" element={<RecipeList />} />

@@ -1,21 +1,38 @@
-import { Card, Form } from "react-bootstrap";
+import { Card, Dropdown, Form } from "react-bootstrap";
 import PreferenceIconEdit from "./PreferenceIconEdit";
+import { User } from "../../Types/Types";
 
-export default function PreferencesSelector() {
+export default function PreferencesSelector({ user }: { user: User }) {
   return (
     <div id="recipe-preferences-selector" className="profile-card-holder">
       <Card>
         <Card.Body>
           <Card.Title>Preferences</Card.Title>
           <Card.Text>
-            <PreferenceIconEdit iconType="preference" name="Vegan" />
-            <PreferenceIconEdit iconType="preference" name="Vegetarian" />
+            {user.preferences.map((pref) => (
+              <PreferenceIconEdit
+                iconType="preference"
+                name={pref}
+                removeSelf={() => {
+                  console.log(`Remove ${pref}`);
+                }}
+              />
+            ))}
           </Card.Text>
-          <Form.Control
-            id="recipe-preferences"
-            placeholder="Preferences"
-            className="mb-2"
-          />
+          <Dropdown>
+            <Dropdown.Toggle className="selector-dropdown">
+              <Form.Control
+                id="recipe-preferences"
+                placeholder="Preferences"
+                className="mb-2"
+              />
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item>Vegan</Dropdown.Item>
+              <Dropdown.Item>Vegetarian</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Card.Body>
       </Card>
     </div>

@@ -1,6 +1,7 @@
 import { Card, Form, InputGroup } from "react-bootstrap";
+import { User } from "../../Types/Types";
 
-export default function BioDisplay() {
+export default function BioDisplay({ user }: { user: User }) {
   return (
     <div className="profile-card-holder">
       <Card id="recipe-profile-bio" className="profile-card">
@@ -10,7 +11,7 @@ export default function BioDisplay() {
             <InputGroup className="mb-3">
               <Form.Control
                 as="textarea"
-                placeholder="Who I am ..."
+                placeholder={user.bio}
                 aria-label="Bio"
               />
             </InputGroup>

@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import BioDisplay from "../../Profile/MyProfileViewer/BioDisplay";
 import AllergenDisplay from "../../Profile/MyProfileViewer/AllergenDisplay";
 import PreferencesDisplay from "../../Profile/MyProfileViewer/PreferencesDisplay";
+import { User } from "../../Types/Types";
 
-export default function OtherProfileViewer() {
+export default function OtherProfileViewer({ user }: { user: User }) {
   return (
     <div id="recipe-profile">
       <Row id="recipe-profile-main">
         <Col md={4}>
-          <ProfileBasicInfo />
+          <ProfileBasicInfo user={user} />
         </Col>
         <Col md={8}>
           <Row>
@@ -30,9 +31,9 @@ export default function OtherProfileViewer() {
             </div>
           </Row>
           <Row>
-            <BioDisplay />
-            <AllergenDisplay />
-            <PreferencesDisplay />
+            <BioDisplay user={user} />
+            <AllergenDisplay user={user} />
+            <PreferencesDisplay user={user} />
           </Row>
         </Col>
       </Row>

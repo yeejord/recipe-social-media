@@ -1,10 +1,11 @@
 import { Card, Col, Container, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { User } from "../Types/Types";
 
-export default function UserCard() {
+export default function UserCard({ user }: { user: User }) {
   return (
     <div>
-      <Link to="/OtherProfile/123/View">
+      <Link to={`/OtherProfile/${user._id}/View`}>
         <Card className="recipe-user-card">
           <Card.Body>
             <Row>
@@ -21,10 +22,10 @@ export default function UserCard() {
               </Col>
               <Col xs={6} xl={9}>
                 <Card.Title className="text-center">
-                  <h1>Name</h1>
+                  <h1>{user.name}</h1>
                 </Card.Title>
                 <Card.Text className="text-center">
-                  <h3>username</h3>
+                  <h3>{user.username}</h3>
                 </Card.Text>
               </Col>
             </Row>

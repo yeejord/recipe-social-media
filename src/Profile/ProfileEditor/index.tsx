@@ -4,13 +4,17 @@ import BioEditor from "./BioEditor";
 import AllergiesSelector from "./AllergiesSelector";
 import PreferencesSelector from "./PreferenceSelector";
 import ProfileEditorBottomBar from "./ProfileEditorBottomBar";
+import * as db from "../../Database";
+import { User } from "../../Types/Types";
 
 export default function ProfileEditor() {
+  const users = db.users as User[];
+  const curUser: User = users[0];
   return (
     <div id="recipe-profile-editor">
       <Row id="recipe-profile-main">
         <Col md={4}>
-          <ProfileBasicInfoEditor />
+          <ProfileBasicInfoEditor user={curUser} />
         </Col>
         <Col md={8}>
           <Row>
@@ -24,9 +28,9 @@ export default function ProfileEditor() {
             </div>
           </Row>
           <Row>
-            <BioEditor />
-            <AllergiesSelector />
-            <PreferencesSelector />
+            <BioEditor user={curUser} />
+            <AllergiesSelector user={curUser} />
+            <PreferencesSelector user={curUser} />
           </Row>
         </Col>
       </Row>
