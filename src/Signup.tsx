@@ -33,7 +33,7 @@ export default function Signup() {
         />
         <Link
           id="recipe-signin-btn"
-          to="/Profile"
+          to="/Profile/123"
           className="btn btn-primary w-100 mb-2 bg-danger"
         >
           Sign up

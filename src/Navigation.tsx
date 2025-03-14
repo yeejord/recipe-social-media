@@ -24,7 +24,7 @@ export default function Navigation() {
         Feed
       </Link>
       <Link
-        to="/Profile"
+        to="/Profile/123"
         id="rs-profile-link"
         className="list-group-item text-center border-0 bg-black text-white"
       >

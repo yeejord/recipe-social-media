@@ -5,7 +5,7 @@ import { User } from "../Types/Types";
 export default function UserCard({ user }: { user: User }) {
   return (
     <div>
-      <Link to={`/OtherProfile/${user._id}/View`}>
+      <Link to={`/Profile/${user._id}/View`}>
         <Card className="recipe-user-card">
           <Card.Body>
             <Row>

@@ -20,8 +20,8 @@
     "bio": "They say \"a watched pot never boils\"... but that is the contradiction of my life. See, I'm striving for a thousand followers... so I can be... a Watched Pot!",
     "email": "watched@boils.com",
     "role": "USER",
-    "allergies": [],
-    "preferences": [],
+    "allergies": ["Wheat"],
+    "preferences": ["Vegetarian"],
     "following": ["123"],
     "followers": ["123"]
   },
@@ -33,8 +33,8 @@
     "bio": "Contrary to the popular belief, you can tuna fish... I mean tune a fish. See one might believe that you can \"tune a piano, but you can't tuna fish\", but they'd be wrong. I am in tune and can play any note on the spectrum. Perfect pitch if you will.",
     "email": "fish@tuna.com",
     "role": "USER",
-    "allergies": [],
-    "preferences": [],
+    "allergies": ["Shellfish"],
+    "preferences": ["Vegan"],
     "following": [],
     "followers": ["123"]
   }
