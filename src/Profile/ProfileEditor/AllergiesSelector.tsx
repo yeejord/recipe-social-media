@@ -16,6 +16,7 @@ export default function AllergiesSelector({ user }: { user: User }) {
                 removeSelf={() => {
                   console.log(`Remove ${allergen}`);
                 }}
+                key={allergen}
               />
             ))}
           </Card.Text>

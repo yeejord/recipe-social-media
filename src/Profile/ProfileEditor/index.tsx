@@ -6,12 +6,20 @@ import PreferencesSelector from "./PreferenceSelector";
 import ProfileEditorBottomBar from "./ProfileEditorBottomBar";
 import * as db from "../../Database";
 import { User } from "../../Types/Types";
+import { Navigate } from "react-router-dom";
 
-export default function ProfileEditor() {
+export default function ProfileEditor({
+  userid,
+}: {
+  userid: string | undefined;
+}) {
   const users = db.users as User[];
   const curUser: User = users[0];
   return (
     <div id="recipe-profile-editor">
+      {userid !== curUser._id && (
+        <Navigate to={`/Profile/${curUser._id}/Edit`} />
+      )}
       <Row id="recipe-profile-main">
         <Col md={4}>
           <ProfileBasicInfoEditor user={curUser} />
@@ -34,7 +42,7 @@ export default function ProfileEditor() {
           </Row>
         </Col>
       </Row>
-      <ProfileEditorBottomBar />
+      <ProfileEditorBottomBar user={curUser} />
     </div>
   );
 }

@@ -10,7 +10,11 @@ export default function AllergenDisplay({ user }: { user: User }) {
           <Card.Title>Allergies</Card.Title>
           <Card.Text>
             {user.allergies.map((allergen) => (
-              <PreferenceIcon iconType="allergen" name={allergen} />
+              <PreferenceIcon
+                iconType="allergen"
+                name={allergen}
+                key={allergen}
+              />
             ))}
           </Card.Text>
         </Card.Body>
