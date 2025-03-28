@@ -10,7 +10,7 @@ export default function PreferencesDisplay({ user }: { user: User }) {
           <Card.Title>Preferences</Card.Title>
           <Card.Text>
             {user.preferences.map((pref) => (
-              <PreferenceIcon iconType="preference" name={pref} />
+              <PreferenceIcon iconType="preference" name={pref} key={pref} />
             ))}
           </Card.Text>
         </Card.Body>

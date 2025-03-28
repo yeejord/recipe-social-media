@@ -7,8 +7,8 @@ export default function UserList({ users }: { users: User[] }) {
     <div id="recipe-user-card-list">
       <Row>
         {users.map((user) => (
-          <Col md={6}>
-            <UserCard user={user} />
+          <Col md={6} key={user._id}>
+            <UserCard user={user} key={user._id} />
           </Col>
         ))}
       </Row>

@@ -41,7 +41,7 @@ export default function MyProfileViewer({ user }: { user: User }) {
           </Row>
         </Col>
       </Row>
-      {curUser._id === user._id && <ProfileBottomBar />}
+      {curUser._id === user._id && <ProfileBottomBar user={user} />}
     </div>
   );
 }

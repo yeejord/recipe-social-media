@@ -16,6 +16,7 @@ export default function PreferencesSelector({ user }: { user: User }) {
                 removeSelf={() => {
                   console.log(`Remove ${pref}`);
                 }}
+                key={pref}
               />
             ))}
           </Card.Text>
