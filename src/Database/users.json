@@ -3,7 +3,7 @@
     "_id": "123",
     "name": "Detective Clock",
     "username": "broken_clock",
-    "password": "right_twice",
+    "password": "0",
     "bio": "Hello, it's me. I'm a human. Yep. That's right. This is definitely not just temp text. Otherwise this would just be lorum posum. And not real text. The fact that you are reading this shows that this can't just be temporary. No. Never. Couldn't be this.",
     "email": "clock@detective.com",
     "role": "USER",

@@ -1,48 +1,59 @@
-import { Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import ProfileBasicInfoEditor from "./ProfileBasicInfoEditor";
 import BioEditor from "./BioEditor";
 import AllergiesSelector from "./AllergiesSelector";
 import PreferencesSelector from "./PreferenceSelector";
 import ProfileEditorBottomBar from "./ProfileEditorBottomBar";
-import * as db from "../../Database";
-import { User } from "../../Types/Types";
 import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import { UserAllergies, UserPreferences } from "../../Types/Types";
 
-export default function ProfileEditor({
-  userid,
-}: {
-  userid: string | undefined;
-}) {
-  const users = db.users as User[];
-  const curUser: User = users[0];
+export default function ProfileEditor({ userid }: { userid: string }) {
+  const { curUser } = useSelector((state: any) => state.userReducer);
+  const [bio, setBio] = useState<string>(curUser.bio);
+  const [username, setUsername] = useState<string>(curUser.username);
+  const [name, setName] = useState<string>(curUser.name);
+  const [allergies, setAllergies] = useState<UserAllergies[]>(
+    curUser.allergies
+  );
+  const [preferences, setPreferences] = useState<UserPreferences[]>(
+    curUser.preferences
+  );
   return (
     <div id="recipe-profile-editor">
-      {userid !== curUser._id && (
-        <Navigate to={`/Profile/${curUser._id}/Edit`} />
-      )}
+      {userid !== curUser._id && <Navigate to={`/Profile/${userid}/View`} />}
       <Row id="recipe-profile-main">
         <Col md={4}>
-          <ProfileBasicInfoEditor user={curUser} />
+          <ProfileBasicInfoEditor
+            username={username}
+            name={name}
+            setUsername={setUsername}
+            setName={setName}
+          />
         </Col>
         <Col md={8}>
           <Row>
-            <div className="d-flex flex-row justify-content-around mt-3">
-              <Button size="lg" disabled variant="outline-primary">
-                Favorite Posts
-              </Button>
-              <Button size="lg" disabled variant="outline-primary">
-                My Posts
-              </Button>
-            </div>
-          </Row>
-          <Row>
-            <BioEditor user={curUser} />
-            <AllergiesSelector user={curUser} />
-            <PreferencesSelector user={curUser} />
+            <BioEditor bio={bio} setBio={setBio} />
+            <AllergiesSelector
+              allergies={allergies}
+              setAllergies={setAllergies}
+            />
+            <PreferencesSelector
+              preferences={preferences}
+              setPreferences={setPreferences}
+            />
           </Row>
         </Col>
       </Row>
-      <ProfileEditorBottomBar user={curUser} />
+      <ProfileEditorBottomBar
+        userId={userid}
+        username={username}
+        name={name}
+        bio={bio}
+        allergies={allergies}
+        preferences={preferences}
+      />
     </div>
   );
 }
