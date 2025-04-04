@@ -1,2 +1,3 @@
 import users from "./users.json";
-export { users };
+import recipes from "./recipes.json"
+export { users, recipes };
