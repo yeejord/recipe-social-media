@@ -16,15 +16,6 @@ export default function ProfileBasicInfo({ user }: { user: User }) {
           </Card>
         </div>
       </Row>
-      <Row className="profile-image-holder">
-        <Image
-          src="../../images/DetectiveClock.png"
-          fluid
-          roundedCircle
-          className="profile-image bg-primary"
-          id="recipe-profile-basic-info-image"
-        />
-      </Row>
     </div>
   );
 }

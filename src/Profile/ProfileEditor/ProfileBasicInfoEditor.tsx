@@ -37,20 +37,6 @@ export default function ProfileBasicInfoEditor({
           </Card>
         </div>
       </Row>
-      <Row className="profile-image-holder">
-        <div className="profile-image-edit-holder">
-          <Image
-            src="../../images/DetectiveClock.png"
-            fluid
-            roundedCircle
-            className="profile-image-edit"
-            id="recipe-profile-basic-info-image"
-          />
-          <FaCameraRetro className="fs-1 image-edit-cam text-black" />
-        </div>
-
-        <p>Insert image above</p>
-      </Row>
     </div>
   );
 }

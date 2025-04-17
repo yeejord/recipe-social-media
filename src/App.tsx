@@ -8,6 +8,7 @@ import Feed from "./Feed";
 import Navigation from "./Navigation";
 import { Provider } from "react-redux";
 import store from "./store";
+import RecipeViewer from "./RecipeViewer";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
               <Route path="/Signin" element={<Signin />} />
               <Route path="/Signup" element={<Signup />} />
               <Route path="/RecipeList" element={<RecipeList />} />
+              <Route path="/Recipe/:recipeid/*" element={<RecipeViewer />} />
               <Route path="/Feed" element={<Feed />} />
               <Route path="/NewRecipe" element={<NewRecipe />} />
             </Routes>
