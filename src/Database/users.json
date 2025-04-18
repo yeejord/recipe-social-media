@@ -1,0 +1,41 @@
+[
+  {
+    "_id": "123",
+    "name": "Detective Clock",
+    "username": "broken_clock",
+    "password": "right_twice",
+    "bio": "Hello, it's me. I'm a human. Yep. That's right. This is definitely not just temp text. Otherwise this would just be lorum posum. And not real text. The fact that you are reading this shows that this can't just be temporary. No. Never. Couldn't be this.",
+    "email": "clock@detective.com",
+    "role": "USER",
+    "allergies": ["Peanuts", "Tree Nuts", "Sesame"],
+    "preferences": [],
+    "following": ["124", "125"],
+    "followers": ["124"]
+  },
+  {
+    "_id": "124",
+    "name": "Watched Pot",
+    "username": "watched_pot",
+    "password": "never_boils",
+    "bio": "They say \"a watched pot never boils\"... but that is the contradiction of my life. See, I'm striving for a thousand followers... so I can be... a Watched Pot!",
+    "email": "watched@boils.com",
+    "role": "USER",
+    "allergies": ["Wheat"],
+    "preferences": ["Vegetarian"],
+    "following": ["123"],
+    "followers": ["123"]
+  },
+  {
+    "_id": "125",
+    "name": "Tuna Fish",
+    "username": "tune_piano",
+    "password": "cant_tuna_fish",
+    "bio": "Contrary to the popular belief, you can tuna fish... I mean tune a fish. See one might believe that you can \"tune a piano, but you can't tuna fish\", but they'd be wrong. I am in tune and can play any note on the spectrum. Perfect pitch if you will.",
+    "email": "fish@tuna.com",
+    "role": "USER",
+    "allergies": ["Shellfish"],
+    "preferences": ["Vegan"],
+    "following": [],
+    "followers": ["123"]
+  }
+]

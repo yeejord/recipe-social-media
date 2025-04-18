@@ -1,60 +1,33 @@
-import { Col, Row, Image, Card, Button } from "react-bootstrap";
-import AllergiesSelector from "./AllergiesSelector";
-import PreferencesSelector from "./PreferenceSelector";
+import { Navigate, Route, Routes, useParams } from "react-router-dom";
+import MyProfileViewer from "./MyProfileViewer";
+import ProfileEditor from "./ProfileEditor";
+import UserList from "../UserList";
+import ProfileNavigation from "./ProfileNavigation";
+import RecipeList from "../RecipeList";
+import * as db from "../Database";
+import { User } from "../Types/Types";
 
 export default function Profile() {
+  const { userid } = useParams();
+  const users = db.users as User[];
+  const user = users.find((user) => user._id === userid);
+  if (!user) {
+    throw new Error("Could not find user");
+  }
+  const followers = users.filter((u) => user.followers.indexOf(u._id) > -1);
+  const followings = users.filter((u) => user.following.indexOf(u._id) > -1);
   return (
-    <div id="recipe-profile">
-      <h1>Profile</h1>
-      <Image src="../../public/images/DetectiveClock.png" roundedCircle />
-      <Card>
-        <Card.Title>Profile</Card.Title>
-        {/* All account attributes */}
-        <Row>
-          <Col>
-            <p className="float-end">Username:</p>
-          </Col>
-          <Col>Something</Col>
-        </Row>
-        <Row>
-          <Col>
-            <p className="float-end">Name:</p>
-          </Col>
-          <Col>Name Here</Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button variant="secondary" className="float-end">
-              Favorites
-            </Button>
-          </Col>
-          <Col>
-            <Button variant="secondary">My Posts</Button>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Button variant="secondary" className="float-end">
-              Following
-            </Button>
-          </Col>
-          <Col>
-            <Button variant="secondary">Followers</Button>
-          </Col>
-        </Row>
-        <AllergiesSelector />
-        <PreferencesSelector />
-        <Row>
-          <Col>
-            <Button variant="warning" className="float-end">
-              Edit
-            </Button>
-          </Col>
-          <Col>
-            <Button variant="danger">Signout</Button>
-          </Col>
-        </Row>
-      </Card>
+    <div>
+      <ProfileNavigation user={user} />
+      <Routes>
+        <Route path="" element={<Navigate to="View" />} />
+        <Route path="View" element={<MyProfileViewer user={user} />} />
+        <Route path="Edit" element={<ProfileEditor userid={userid} />} />
+        <Route path="Followers" element={<UserList users={followers} />} />
+        <Route path="Following" element={<UserList users={followings} />} />
+        <Route path="Favorites" element={<RecipeList />} />
+        <Route path="MyPosts" element={<RecipeList />} />
+      </Routes>
     </div>
   );
 }
