@@ -22,9 +22,11 @@ const recipeSlice = createSlice ({
               r._id === recipeId ? { ...r, editing: true } : r
             ) as any;
         },
-      
+        addRecipe: (state, { payload: newRecipe }) => {
+          state.recipes.push(newRecipe);
+        },
     },
 });
 
-export const { deleteRecipe, editRecipe, updateRecipe } = recipeSlice.actions;
+export const { deleteRecipe, editRecipe, updateRecipe, addRecipe } = recipeSlice.actions;
 export default recipeSlice.reducer;

@@ -3,12 +3,13 @@ import Profile from "./Profile";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import RecipeList from "./RecipeList";
-import NewRecipe from "./New Recipe";
+import NewRecipe from "./Feed/Recipe/NewRecipe";
 import Feed from "./Feed";
 import Navigation from "./Navigation";
 import { Provider } from "react-redux";
 import store from "./store";
 import EditRecipe from "./Feed/Recipe/EditRecipe";
+import RecipeDetails from "./Feed/Recipe/RecipeDetails";
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="/Feed" element={<Feed />} />
             <Route path="/NewRecipe" element={<NewRecipe />} />
             <Route path="/Feed/EditRecipe/:recipeid/*" element={<EditRecipe />} />
+            <Route path="/Feed/RecipeDetails/:recipeid/*" element={<RecipeDetails />} />
           </Routes>
         </div>
         </Provider>
