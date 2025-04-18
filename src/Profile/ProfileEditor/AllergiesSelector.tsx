@@ -1,20 +1,31 @@
 import { Card, Dropdown, Form } from "react-bootstrap";
 import PreferenceIconEdit from "./PreferenceIconEdit";
-import { User } from "../../Types/Types";
+import { UserAllergies, allAllergies } from "../../Types/Types";
+import { useState } from "react";
 
-export default function AllergiesSelector({ user }: { user: User }) {
+export default function AllergiesSelector({
+  allergies,
+  setAllergies,
+}: {
+  allergies: UserAllergies[];
+  setAllergies: (allergies: UserAllergies[]) => void;
+}) {
+  const notAllergies = allAllergies.filter((a) => allergies.indexOf(a) === -1);
+  const [searchVal, setSearchVal] = useState<string>("");
   return (
     <div id="recipe-allergies-selector" className="profile-card-holder">
       <Card>
         <Card.Body>
           <Card.Title>Allergies</Card.Title>
           <Card.Text>
-            {user.allergies.map((allergen) => (
+            {allergies.map((allergen) => (
               <PreferenceIconEdit
                 iconType="allergen"
                 name={allergen}
                 removeSelf={() => {
-                  console.log(`Remove ${allergen}`);
+                  setAllergies(
+                    allergies.filter((a: UserAllergies) => a !== allergen)
+                  );
                 }}
                 key={allergen}
               />
@@ -26,15 +37,22 @@ export default function AllergiesSelector({ user }: { user: User }) {
                 id="recipe-allergies"
                 placeholder="Allergies"
                 className="mb-2"
+                onChange={(e) => setSearchVal(e.target.value)}
               />
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item>Tree Nuts</Dropdown.Item>
-              <Dropdown.Item>Peanuts</Dropdown.Item>
-              <Dropdown.Item>Wheat</Dropdown.Item>
-              <Dropdown.Item>Dairy</Dropdown.Item>
-              <Dropdown.Item>Shellfish</Dropdown.Item>
+              {notAllergies
+                .filter((a) =>
+                  a.toLowerCase().includes(searchVal.toLowerCase())
+                )
+                .map((a) => (
+                  <Dropdown.Item
+                    onClick={(e) => setAllergies([...allergies, a])}
+                  >
+                    {a}
+                  </Dropdown.Item>
+                ))}
             </Dropdown.Menu>
           </Dropdown>
         </Card.Body>

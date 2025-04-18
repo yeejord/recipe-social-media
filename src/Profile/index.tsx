@@ -22,7 +22,7 @@ export default function Profile() {
       <Routes>
         <Route path="" element={<Navigate to="View" />} />
         <Route path="View" element={<MyProfileViewer user={user} />} />
-        <Route path="Edit" element={<ProfileEditor userid={userid} />} />
+        <Route path="Edit" element={<ProfileEditor userid={user._id} />} />
         <Route path="Followers" element={<UserList users={followers} />} />
         <Route path="Following" element={<UserList users={followings} />} />
         <Route path="Favorites" element={<RecipeList />} />
