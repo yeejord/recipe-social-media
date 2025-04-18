@@ -6,12 +6,18 @@ import RecipeList from "./RecipeList";
 import NewRecipe from "./New Recipe";
 import Feed from "./Feed";
 import Navigation from "./Navigation";
+import { Provider } from "react-redux";
+import store from "./store";
+import EditRecipe from "./Feed/Recipe/EditRecipe";
 
 export default function App() {
   return (
     <HashRouter>
       <div id="rs-App">
-        <Navigation z-index={5} />
+        <Provider store={store}>
+        <div className="mb-4">
+          <Navigation z-index={5} />
+        </div>
         <div className="rs-main-content-offset p-5">
           <Routes>
             {/* Temporary Routes */}
@@ -22,8 +28,10 @@ export default function App() {
             <Route path="/RecipeList" element={<RecipeList />} />
             <Route path="/Feed" element={<Feed />} />
             <Route path="/NewRecipe" element={<NewRecipe />} />
+            <Route path="/Feed/EditRecipe/:recipeid/*" element={<EditRecipe />} />
           </Routes>
         </div>
+        </Provider>
       </div>
     </HashRouter>
   );

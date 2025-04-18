@@ -4,7 +4,7 @@ import BioEditor from "./BioEditor";
 import AllergiesSelector from "./AllergiesSelector";
 import PreferencesSelector from "./PreferenceSelector";
 import ProfileEditorBottomBar from "./ProfileEditorBottomBar";
-import * as db from "../../Database";
+import db from "../../Database";
 import { User } from "../../Types/Types";
 import { Navigate } from "react-router-dom";
 

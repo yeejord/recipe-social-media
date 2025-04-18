@@ -1,5 +1,5 @@
 import FeedControls from "./FeedControls";
-import Recipes from "./Recipe";
+import Recipes from "./Recipe/Recipe";
 
 export default function Feed() {
     return(

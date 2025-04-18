@@ -19,7 +19,7 @@ export default function Signin() {
         />
         <Link
           id="recipe-signin-btn"
-          to="/Profile/123"
+          to="/Feed"
           className="btn btn-primary w-100 mb-2"
         >
           Sign in

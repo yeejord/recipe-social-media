@@ -4,7 +4,7 @@ import ProfileEditor from "./ProfileEditor";
 import UserList from "../UserList";
 import ProfileNavigation from "./ProfileNavigation";
 import RecipeList from "../RecipeList";
-import * as db from "../Database";
+import db from "../Database";
 import { User } from "../Types/Types";
 
 export default function Profile() {

@@ -1,4 +1,4 @@
-import { Button, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { User } from "../../Types/Types";
 
@@ -7,13 +7,13 @@ export default function ProfileEditorBottomBar({ user }: { user: User }) {
     <Row>
       <div
         id="recipe-profile-bottom"
-        className="d-flex flex-row justify-content-between m-3"
+        className="d-flex flex-row blue-bg justify-content-between m-3"
       >
         <Link
           className="btn btn-danger btn-lg m-3"
           to={`/Profile/${user._id}/View`}
         >
-          Revert Changes
+          Cancel Changes
         </Link>
         <Link
           className="btn btn-warning btn-lg m-3"

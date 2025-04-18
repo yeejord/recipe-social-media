@@ -5,7 +5,7 @@ import AllergenDisplay from "./AllergenDisplay";
 import PreferencesDisplay from "./PreferencesDisplay";
 import BioDisplay from "./BioDisplay";
 import { Link } from "react-router-dom";
-import * as db from "../../Database";
+import db from "../../Database";
 import { User } from "../../Types/Types";
 
 export default function MyProfileViewer({ user }: { user: User }) {

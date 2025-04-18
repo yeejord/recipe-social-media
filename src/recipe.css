@@ -67,7 +67,7 @@
 }
 
 .recipe-profile-nav {
-  background-color: rgba(0, 255, 255, 0.361);
+  background-color: #ADD8E6;
 }
 
 .recipe-user-card {
@@ -75,9 +75,14 @@
 }
 
 #recipe-profile-bottom {
-  background-color: rgba(0, 255, 255, 0.361);
+  background-color: #ADD8E6;
 }
 
 #app {
   padding: 1em;
+}
+
+.active-link {
+  background-color: #007bff;
+  color: white;
 }
