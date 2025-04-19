@@ -8,6 +8,9 @@ import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { UserAllergies, UserPreferences } from "../../Types/Types";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setCurrentUser } from "../reducer";
 
 export default function ProfileEditor({ userid }: { userid: string }) {
   const { curUser } = useSelector((state: any) => state.userReducer);
@@ -20,6 +23,21 @@ export default function ProfileEditor({ userid }: { userid: string }) {
   const [preferences, setPreferences] = useState<UserPreferences[]>(
     curUser.preferences
   );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const updateUser = () => {
+    dispatch(
+      setCurrentUser({
+        _id: userid,
+        username: username,
+        name: name,
+        bio: bio,
+        allergies: allergies,
+        preferences: preferences,
+      })
+    );
+    navigate(`/Profile/${userid}/View`);
+  };
   return (
     <div id="recipe-profile-editor">
       {userid !== curUser._id && <Navigate to={`/Profile/${userid}/View`} />}
@@ -46,14 +64,7 @@ export default function ProfileEditor({ userid }: { userid: string }) {
           </Row>
         </Col>
       </Row>
-      <ProfileEditorBottomBar
-        userId={userid}
-        username={username}
-        name={name}
-        bio={bio}
-        allergies={allergies}
-        preferences={preferences}
-      />
+      <ProfileEditorBottomBar updateUser={updateUser} userid={userid} />
     </div>
   );
 }
