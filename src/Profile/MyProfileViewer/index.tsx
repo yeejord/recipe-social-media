@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 export default function MyProfileViewer({ user }: { user: User }) {
   const { curUser } = useSelector((state: any) => state.userReducer);
-  if (user._id === curUser._id) {
+  if (!!curUser && user._id === curUser._id) {
     user = curUser;
   }
   return (
@@ -26,7 +26,9 @@ export default function MyProfileViewer({ user }: { user: User }) {
           </Row>
         </Col>
       </Row>
-      {curUser._id === user._id && <ProfileBottomBar user={user} />}
+      {!!curUser && curUser._id === user._id && (
+        <ProfileBottomBar user={user} />
+      )}
     </div>
   );
 }

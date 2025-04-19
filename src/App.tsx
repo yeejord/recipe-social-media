@@ -9,6 +9,7 @@ import Navigation from "./Navigation";
 import { Provider } from "react-redux";
 import store from "./store";
 import RecipeViewer from "./RecipeViewer";
+import ProtectedRoute from "./ProtectedRoute";
 
 export default function App() {
   return (
@@ -27,6 +28,14 @@ export default function App() {
               <Route path="/Recipe/:recipeid/*" element={<RecipeViewer />} />
               <Route path="/Feed" element={<Feed />} />
               <Route path="/NewRecipe" element={<NewRecipe />} />
+              <Route
+                path="/Profile"
+                element={
+                  <ProtectedRoute>
+                    <Profile />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </div>
         </div>

@@ -52,7 +52,9 @@ export default function RecipeViewer() {
               <h3>Recipe Steps</h3>
             </Card.Title>
             <Card.Body>
-              <p>{steps}</p>
+              {steps.split("\n").map((line) => (
+                <p key={line}>{line}</p>
+              ))}
             </Card.Body>
           </div>
         )}
@@ -62,7 +64,7 @@ export default function RecipeViewer() {
               <h3>Recipe Link</h3>
             </Card.Title>
             <Card.Body>
-              <p>{link}</p>
+              <a href={link}>{link}</a>
             </Card.Body>
           </div>
         )}

@@ -6,9 +6,19 @@ import ProfileNavigation from "./ProfileNavigation";
 import RecipeList from "../RecipeList";
 import * as db from "../Database";
 import { User } from "../Types/Types";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
+  const { curUser } = useSelector((state: any) => state.userReducer);
+  const navigate = useNavigate();
   const { userid } = useParams();
+  if (!userid) {
+    // If there is no user id navigate to the current user
+    if (!!curUser) {
+      navigate(`/profile/${curUser._id}`);
+    }
+  }
   const users = db.users as User[];
   const user = users.find((user) => user._id === userid);
   if (!user) {
