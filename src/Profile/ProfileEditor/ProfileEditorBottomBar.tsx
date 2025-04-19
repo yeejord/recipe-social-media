@@ -14,7 +14,7 @@ export default function ProfileEditorBottomBar({user, onSave,}: {
       >
         <Link
           className="btn btn-danger btn-lg m-3"
-          to={`/Profile/${user._id}/View`}
+          to={`/Profile/${userId}/View`}
         >
           Cancel Changes
         </Link>

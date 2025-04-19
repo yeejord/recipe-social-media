@@ -30,7 +30,7 @@ export default function ProfileBasicInfoEditor({
               <Form.Control
                 placeholder="Username"
                 aria-label="Username"
-                value={username}
+                value={username
                 onChange={(e) => setUsername(e.target.value)}
               />
             </InputGroup>
