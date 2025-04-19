@@ -6,7 +6,7 @@ import PreferencesSelector from "./PreferenceSelector";
 import ProfileEditorBottomBar from "./ProfileEditorBottomBar";
 import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUser } from "./reducer";
+import { updateUser } from "../reducer";
 import { useState } from "react";
 
 export default function ProfileEditor({userid,}: {userid: string | undefined;}) {

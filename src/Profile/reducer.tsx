@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import db from "../../Database";
+import db from "../Database";
 
 const initialState = {
     users: db.users, };
@@ -26,8 +26,16 @@ const userSlice = createSlice ({
         addUser: (state, { payload: newUser }) => {
           state.users.push(newUser);
         },
+        addRecipeToUser: (state, { payload }) => {
+          const { userId, recipe } = payload;
+          state.users = state.users.map((u: any) =>
+            u._id === userId
+              ? { ...u, recipes: [...(u.recipes || []), recipe] }
+              : u
+          );
+        },
     },
 });
 
-export const { deleteUser, editUser, updateUser, addUser } = userSlice.actions;
+export const { deleteUser, editUser, updateUser, addUser, addRecipeToUser } = userSlice.actions;
 export default userSlice.reducer;

@@ -5,6 +5,7 @@ import db from "../../Database";
 import { useState } from "react";
 import { addRecipe } from "../reducer";
 import { useDispatch } from 'react-redux';
+import { addRecipeToUser } from "../../Profile/reducer";
 
 export default function NewRecipe(){
     const { recipeid } = useParams();
@@ -22,6 +23,7 @@ export default function NewRecipe(){
     const handleCreateRecipe = () => {
         dispatch(addRecipe({
             _id: recipeid,
+            owner: "123",
             name,
             description,
             stars,
@@ -29,6 +31,16 @@ export default function NewRecipe(){
             steps,
             link,
         }));
+        dispatch(addRecipeToUser({ 
+          userId: "123", 
+          recipe: { _id: recipeid,
+            owner: "123",
+            name,
+            description,
+            stars,
+            ingredients,
+            steps,
+            link, } }));
         navigate("/Feed");
     };
 

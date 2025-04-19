@@ -1,15 +1,22 @@
 import { ListGroup } from "react-bootstrap";
-import { FaStar, FaTrash } from "react-icons/fa";
+import { FaBookmark, FaRegBookmark, FaStar, FaTrash } from "react-icons/fa";
 import { deleteRecipe } from "../reducer";
 import "./../feed.css";
 import { useDispatch, useSelector } from "react-redux";
 import { FaPencil } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import db from "../../Database"
 
 export default function Recipes({filter}: any){
     const { recipes } = useSelector((state: any) => state.recipesReducer);
-    const currentUser = db.users.find((u : any) => u._id === "123");
+    const { users } = useSelector((state: any) => state.profilesReducer); 
+    const currentUser = users.find((u: any) => u._id === "123") ?? {
+      _id: "123",
+      name: "",
+      username: "",
+      bio: "",
+      allergies: [],
+      preferences: [],
+    };   
     const dispatch = useDispatch();
 
     const filteredRecipes = recipes.filter((recipe: any) => {
@@ -17,6 +24,20 @@ export default function Recipes({filter}: any){
       if (filter === "saved") return currentUser?.savedRecipes?.includes(recipe._id);
       return true; 
     });
+
+    const toggleSaveRecipe = (recipeId: string) => {
+      if (!currentUser) return;
+    
+      const saved = currentUser.savedRecipes || [];
+      const updatedSaved = saved.includes(recipeId)
+        ? saved.filter((id: string) => id !== recipeId)
+        : [...saved, recipeId];
+    
+      dispatch({
+        type: "users/updateUser",
+        payload: { ...currentUser, savedRecipes: updatedSaved },
+      });
+    };
 
     return(
         <div id="rs-recipe-list">
@@ -53,6 +74,21 @@ export default function Recipes({filter}: any){
                       size={18}
                     />
                  </Link>
+                 <button
+                    className="btn border-0"
+                    onClick={() => toggleSaveRecipe(recipe._id)}
+                    title={
+                      currentUser?.savedRecipes?.includes(recipe._id)
+                        ? "Unsave Recipe"
+                        : "Save Recipe"
+                    }
+                  >
+                    {currentUser?.savedRecipes?.includes(recipe._id) ? (
+                      <FaBookmark size={18} style={{ color: "dodgerblue" }} />
+                    ) : (
+                      <FaRegBookmark size={18} style={{ color: "gray" }} />
+                    )}
+                  </button>
               </div>
             </div>
             <img src="/images/baked-ziti.jpg" alt="Recipe" className="ms-3" style={{ width: '100px', height: 'auto', objectFit: 'cover' }} />

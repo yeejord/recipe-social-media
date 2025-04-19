@@ -1,6 +1,4 @@
 import { Button, Nav } from "react-bootstrap";
-import { User } from "../Types/Types";
-import db from "../Database";
 import { useSelector } from "react-redux";
 
 export default function ProfileNavigation({ user, filter, setFilter}: any) {
