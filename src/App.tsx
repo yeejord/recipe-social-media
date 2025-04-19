@@ -8,6 +8,7 @@ import Feed from "./Feed";
 import Navigation from "./Navigation";
 import { Provider } from "react-redux";
 import store from "./store";
+
 import EditRecipe from "./Feed/Recipe/EditRecipe";
 import RecipeDetails from "./Feed/Recipe/RecipeDetails";
 

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Card, Dropdown, Form } from "react-bootstrap";
 import PreferenceIconEdit from "./PreferenceIconEdit";
 
+
 export default function PreferencesSelector({
   preferences,
   setPreferences,

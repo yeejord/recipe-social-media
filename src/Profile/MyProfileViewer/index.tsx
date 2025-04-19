@@ -9,6 +9,7 @@ import { User } from "../../Types/Types";
 import { useSelector } from "react-redux";
 
 export default function MyProfileViewer({ user }: { user: User }) {
+
   const { users } = useSelector((state: any) => state.profilesReducer); 
   const curUser = users.find((u: any) => u._id === user._id) ?? {
     _id: "123",
