@@ -10,7 +10,9 @@
     "allergies": ["Peanuts", "Tree Nuts", "Sesame"],
     "preferences": [],
     "following": ["124", "125"],
-    "followers": ["124"]
+    "followers": ["124"],
+    "myRecipes": ["R1", "R2"],
+    "savedRecipes": ["R3"]
   },
   {
     "_id": "124",
@@ -23,7 +25,9 @@
     "allergies": ["Wheat"],
     "preferences": ["Vegetarian"],
     "following": ["123"],
-    "followers": ["123"]
+    "followers": ["123"],
+    "myRecipes": ["R3", "R4"],
+    "savedRecipes": ["R1", "R3"]
   },
   {
     "_id": "125",
@@ -36,6 +40,8 @@
     "allergies": ["Shellfish"],
     "preferences": ["Vegan"],
     "following": [],
-    "followers": ["123"]
+    "followers": ["123"],
+    "myRecipes": [],
+    "savedRecipes": []
   }
 ]

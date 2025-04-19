@@ -17,6 +17,9 @@ export default function Navigation() {
                 d-flex flex-row w-100 top-0 start-0 bg-black"
       z-index={5}
     >
+      <div className="ms-2 text-white">
+        <h4>Recipz</h4>
+      </div>
       <InputGroup size="sm" className="ms-4 me-4 bg-white" id="wd-search-bar">
         <InputGroup.Text>
           <FaMagnifyingGlass />

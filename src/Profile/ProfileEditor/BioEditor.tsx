@@ -11,7 +11,7 @@ export default function BioDisplay({ user }: { user: User }) {
             <InputGroup className="mb-3">
               <Form.Control
                 as="textarea"
-                placeholder={user.bio}
+                value={user.bio}
                 aria-label="Bio"
               />
             </InputGroup>

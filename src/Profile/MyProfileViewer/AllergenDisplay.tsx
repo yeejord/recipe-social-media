@@ -5,7 +5,7 @@ import { User } from "../../Types/Types";
 export default function AllergenDisplay({ user }: { user: User }) {
   return (
     <div className="profile-card-holder">
-      <Card id="recipe-profile-allergens" className="profile-card">
+      <Card id="recipe-profile-allergens" className="profile-card border-0">
         <Card.Body>
           <Card.Title>Allergies</Card.Title>
           <Card.Text>

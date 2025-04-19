@@ -8,6 +8,9 @@ export default function ProfileBasicInfoEditor({ user }: { user: User }) {
       <Row>
         <div className="profile-card-holder">
           <Card className="p-2">
+            <div>
+              <h5>Name</h5>
+            </div>
             <InputGroup className="mb-3" size="lg">
               <Form.Control
                 placeholder="Name"
@@ -15,6 +18,9 @@ export default function ProfileBasicInfoEditor({ user }: { user: User }) {
                 defaultValue={user.name}
               />
             </InputGroup>
+            <div>
+              <h5>Username</h5>
+            </div>
             <InputGroup className="mb-3">
               <Form.Control
                 placeholder="Username"

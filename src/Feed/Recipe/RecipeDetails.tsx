@@ -1,7 +1,8 @@
 import { Button, Col, Row } from "react-bootstrap";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import db from "../../Database";
 import { FaStar } from "react-icons/fa";
+import { FaPencil } from "react-icons/fa6";
 
 export default function RecipeDetails() {
     const { recipeid } = useParams();
@@ -26,6 +27,13 @@ export default function RecipeDetails() {
                                 <FaStar key={index} style={{ color: "gold", fontSize: "2rem" }} />
                             ))}
                         </div>
+                        <Link to={`/Feed/EditRecipe/${recipe?._id}`} className="btn border-0">
+                            <FaPencil 
+                            style={{ cursor: "pointer", color: "blue" }}
+                            title="Edit Recipe"
+                            size={18}
+                            />
+                        </Link>
                     </div>
 
                     <div className="mb-4">

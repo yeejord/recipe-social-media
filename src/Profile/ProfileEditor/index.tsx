@@ -1,4 +1,4 @@
-import { Button, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import ProfileBasicInfoEditor from "./ProfileBasicInfoEditor";
 import BioEditor from "./BioEditor";
 import AllergiesSelector from "./AllergiesSelector";
@@ -7,6 +7,8 @@ import ProfileEditorBottomBar from "./ProfileEditorBottomBar";
 import db from "../../Database";
 import { User } from "../../Types/Types";
 import { Navigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUser } from "../reducer";
 
 export default function ProfileEditor({
   userid,
@@ -15,6 +17,13 @@ export default function ProfileEditor({
 }) {
   const users = db.users as User[];
   const curUser: User = users[0];
+
+  const dispatch = useDispatch();
+
+  const handleUpdate = (updatedFields:any) => {
+    dispatch(updateUser({ ...curUser, ...updatedFields }));
+  };
+
   return (
     <div id="recipe-profile-editor">
       {userid !== curUser._id && (
@@ -25,16 +34,6 @@ export default function ProfileEditor({
           <ProfileBasicInfoEditor user={curUser} />
         </Col>
         <Col md={8}>
-          <Row>
-            <div className="d-flex flex-row justify-content-around mt-3">
-              <Button size="lg" disabled variant="outline-primary">
-                Favorite Posts
-              </Button>
-              <Button size="lg" disabled variant="outline-primary">
-                My Posts
-              </Button>
-            </div>
-          </Row>
           <Row>
             <BioEditor user={curUser} />
             <AllergiesSelector user={curUser} />

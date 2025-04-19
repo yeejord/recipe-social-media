@@ -22,7 +22,7 @@ export default function App() {
         <div className="rs-main-content-offset p-5">
           <Routes>
             {/* Temporary Routes */}
-            <Route path="/" element={<Navigate to="/Signin" />} />
+            <Route path="/" element={<Navigate to="/Feed" />} />
             <Route path="/Profile/:userid/*" element={<Profile />} />
             <Route path="/Signin" element={<Signin />} />
             <Route path="/Signup" element={<Signup />} />

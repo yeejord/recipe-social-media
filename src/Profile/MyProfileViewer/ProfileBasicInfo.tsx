@@ -6,7 +6,7 @@ export default function ProfileBasicInfo({ user }: { user: User }) {
     <div id="recipe-profile-basic-info">
       <Row>
         <div className="profile-card-holder">
-          <Card>
+          <Card className="border-0">
             <Card.Title className="text-center" id="recipe-profile-name">
               {user.name}
             </Card.Title>
@@ -16,12 +16,12 @@ export default function ProfileBasicInfo({ user }: { user: User }) {
           </Card>
         </div>
       </Row>
-      <Row className="profile-image-holder">
+      <Row className="profile-image-holder d-flex justify-content-center">
         <Image
           src="../../images/DetectiveClock.png"
           fluid
           roundedCircle
-          className="profile-image bg-primary"
+          className="profile-image bg-primary w-50"
           id="recipe-profile-basic-info-image"
         />
       </Row>

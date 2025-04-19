@@ -19,18 +19,18 @@ export default function MyProfileViewer({ user }: { user: User }) {
         </Col>
         <Col md={8}>
           <Row>
-            <div className="d-flex flex-row justify-content-around m-3">
-              <Link
-                className="btn btn-primary btn-lg m-3"
-                to={`/Profile/${user._id}/Favorites`}
-              >
-                Favorite Posts
-              </Link>
+            <div className="flex-row justify-content-around m-3">
               <Link
                 className="btn btn-primary btn-lg m-3"
                 to={`/Profile/${user._id}/MyPosts`}
               >
-                My Posts
+                My Recipes
+              </Link>
+              <Link
+                className="btn btn-primary btn-lg m-3"
+                to={`/Profile/${user._id}/Favorites`}
+              >
+                My Saved
               </Link>
             </div>
           </Row>

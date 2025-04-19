@@ -5,14 +5,22 @@ import "./../feed.css";
 import { useDispatch, useSelector } from "react-redux";
 import { FaPencil } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import db from "../../Database"
 
-export default function Recipes(){
+export default function Recipes({filter}: any){
     const { recipes } = useSelector((state: any) => state.recipesReducer);
+    const currentUser = db.users.find((u : any) => u._id === "123");
     const dispatch = useDispatch();
+
+    const filteredRecipes = recipes.filter((recipe: any) => {
+      if (filter === "mine") return recipe.owner === "123";
+      if (filter === "saved") return currentUser?.savedRecipes?.includes(recipe._id);
+      return true; 
+    });
 
     return(
         <div id="rs-recipe-list">
-          {recipes.map((recipe: any) => (
+          {filteredRecipes.slice().reverse().map((recipe: any) => (
           <ListGroup className="rounded-0" id="wd-modules">
           <ListGroup.Item className="rs-recipe p-0 mb-3 fs-5 rounded-3 blue-bg recipe-image">
           <div className="p-3 ps-2 text-start border-gray d-flex justify-content-between align-items-center">
