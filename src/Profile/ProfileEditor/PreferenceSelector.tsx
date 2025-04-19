@@ -9,10 +9,8 @@ export default function PreferencesSelector({
   preferences: string[];
   setPreferences: (newPrefs: string[]) => void;
 }) {
-  // local state for whatever the user picks
   const [newPref, setNewPref] = useState<string>("");
 
-  // replace these with your actual preference options
   const options = ["Vegan", "Vegetarian", "Gluten‑Free", "Keto", "Paleo"];
 
   return (

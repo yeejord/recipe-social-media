@@ -1,6 +1,5 @@
 import { Button, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { User } from "../../Types/Types";
 
 export default function ProfileEditorBottomBar({user, onSave,}: {
   user: any; onSave: () => void;}) {

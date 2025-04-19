@@ -5,7 +5,6 @@ import AllergenDisplay from "./AllergenDisplay";
 import PreferencesDisplay from "./PreferencesDisplay";
 import BioDisplay from "./BioDisplay";
 import { Link } from "react-router-dom";
-import db from "../../Database";
 import { User } from "../../Types/Types";
 import { useSelector } from "react-redux";
 
