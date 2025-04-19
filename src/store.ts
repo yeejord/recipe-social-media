@@ -1,6 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./Profile/reducer";
+import recipesReducer from "./Feed/reducer";
+import profilesReducer from "./Profile/ProfileEditor/reducer";
 const store = configureStore({
-  reducer: { userReducer },
+  reducer: {
+    recipesReducer,
+    profilesReducer,
+  },
 });
 export default store;

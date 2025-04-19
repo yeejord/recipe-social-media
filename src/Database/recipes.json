@@ -1,6 +1,6 @@
 [
-    { "_id": "R1", "name": "Baked Ziti", "description": "a cheesy baked pasta dish", "stars": 4},
-    { "_id": "R2", "name": "chocolate chip cookies", "description": "gooey perfection", "stars": 3},
-    { "_id": "R3", "name": "breaded chicken cutlets", "description": "crispy, double breaded and fried chicken", "stars": 5},
-    { "_id": "R4", "name": "tomato and beef rice dish", "description": "chinese cuisine inspired rice dish", "stars": 3}
+    { "_id": "R1", "owner": "123", "name": "Baked Ziti", "description": "a cheesy baked pasta dish", "ingredients": "pasta, ricotta, sauce, etc", "steps": "", "link": "", "stars": 4},
+    { "_id": "R2", "owner": "123", "name": "chocolate chip cookies", "description": "gooey perfection", "ingredients": "butter, flour, sugar, egg, chocolate chips, etc", "stars": 3},
+    { "_id": "R3", "owner": "123", "name": "breaded chicken cutlets", "description": "crispy, double breaded and fried chicken", "ingredients": "chicken breast, egg, flour, bread crumbs, oil, etc", "stars": 5},
+    { "_id": "R4", "owner": "124", "name": "tomato and beef rice dish", "description": "chinese cuisine inspired rice dish", "ingredients": "white rice, beef, tomato, etc", "stars": 3}
 ]

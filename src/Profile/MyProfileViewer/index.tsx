@@ -4,14 +4,21 @@ import ProfileBasicInfo from "./ProfileBasicInfo";
 import AllergenDisplay from "./AllergenDisplay";
 import PreferencesDisplay from "./PreferencesDisplay";
 import BioDisplay from "./BioDisplay";
+import { Link } from "react-router-dom";
 import { User } from "../../Types/Types";
 import { useSelector } from "react-redux";
 
 export default function MyProfileViewer({ user }: { user: User }) {
-  const { curUser } = useSelector((state: any) => state.userReducer);
-  if (user._id === curUser._id) {
-    user = curUser;
-  }
+
+  const { users } = useSelector((state: any) => state.profilesReducer); 
+  const curUser = users.find((u: any) => u._id === user._id) ?? {
+    _id: "123",
+    name: "",
+    username: "",
+    bio: "",
+    allergies: [],
+    preferences: [],
+  };   
   return (
     <div id="recipe-profile">
       <Row id="recipe-profile-main">
@@ -19,6 +26,22 @@ export default function MyProfileViewer({ user }: { user: User }) {
           <ProfileBasicInfo user={user} />
         </Col>
         <Col md={8}>
+          <Row>
+            <div className="flex-row justify-content-around m-3">
+              <Link
+                className="btn btn-primary btn-lg m-3"
+                to={`/Profile/${user._id}/MyPosts`}
+              >
+                My Recipes
+              </Link>
+              <Link
+                className="btn btn-primary btn-lg m-3"
+                to={`/Profile/${user._id}/Favorites`}
+              >
+                My Saved
+              </Link>
+            </div>
+          </Row>
           <Row>
             <BioDisplay user={user} />
             <AllergenDisplay user={user} />
