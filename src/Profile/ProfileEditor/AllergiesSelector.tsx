@@ -1,40 +1,61 @@
+import { useState } from "react";
 import { Card, Dropdown, Form } from "react-bootstrap";
 import PreferenceIconEdit from "./PreferenceIconEdit";
-import { User } from "../../Types/Types";
 
-export default function AllergiesSelector({ user }: { user: User }) {
+export default function AllergiesSelector({
+  allergies,
+  setAllergies,
+}: {
+  allergies: string[];
+  setAllergies: (newAllergies: string[]) => void;
+}) {
+  const [newAllergy, setNewAllergy] = useState<string>("");
+
+  const options = ["Tree Nuts", "Peanuts", "Wheat", "Dairy", "Shellfish"];
+
   return (
     <div id="recipe-allergies-selector" className="profile-card-holder">
       <Card>
         <Card.Body>
           <Card.Title>Allergies</Card.Title>
           <Card.Text>
-            {user.allergies.map((allergen) => (
+            {allergies.map((allergen) => (
               <PreferenceIconEdit
                 iconType="allergen"
                 name={allergen}
-                removeSelf={() => {
-                  console.log(`Remove ${allergen}`);
-                }}
+                removeSelf={() =>
+                  setAllergies(allergies.filter((a) => a !== allergen))
+                }
                 key={allergen}
               />
             ))}
           </Card.Text>
+
           <Dropdown>
             <Dropdown.Toggle className="selector-dropdown">
               <Form.Control
-                id="recipe-allergies"
-                placeholder="Allergies"
+                id="recipe-allergy-input"
+                placeholder="Add Allergy"
                 className="mb-2"
+                value={newAllergy}
+                readOnly
               />
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item>Tree Nuts</Dropdown.Item>
-              <Dropdown.Item>Peanuts</Dropdown.Item>
-              <Dropdown.Item>Wheat</Dropdown.Item>
-              <Dropdown.Item>Dairy</Dropdown.Item>
-              <Dropdown.Item>Shellfish</Dropdown.Item>
+              {options.map((opt) => (
+                <Dropdown.Item
+                  key={opt}
+                  onClick={() => {
+                    setNewAllergy(opt);
+                    if (!allergies.includes(opt)) {
+                      setAllergies([...allergies, opt]);
+                    }
+                  }}
+                >
+                  {opt}
+                </Dropdown.Item>
+              ))}
             </Dropdown.Menu>
           </Dropdown>
         </Card.Body>

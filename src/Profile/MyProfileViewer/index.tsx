@@ -7,10 +7,18 @@ import BioDisplay from "./BioDisplay";
 import { Link } from "react-router-dom";
 import db from "../../Database";
 import { User } from "../../Types/Types";
+import { useSelector } from "react-redux";
 
 export default function MyProfileViewer({ user }: { user: User }) {
-  const users = db.users as User[];
-  const curUser: User = users[0];
+  const { users } = useSelector((state: any) => state.profilesReducer); 
+  const curUser = users.find((u: any) => u._id === user._id) ?? {
+    _id: "123",
+    name: "",
+    username: "",
+    bio: "",
+    allergies: [],
+    preferences: [],
+  };   
   return (
     <div id="recipe-profile">
       <Row id="recipe-profile-main">

@@ -1,37 +1,63 @@
+import { useState } from "react";
 import { Card, Dropdown, Form } from "react-bootstrap";
 import PreferenceIconEdit from "./PreferenceIconEdit";
-import { User } from "../../Types/Types";
 
-export default function PreferencesSelector({ user }: { user: User }) {
+export default function PreferencesSelector({
+  preferences,
+  setPreferences,
+}: {
+  preferences: string[];
+  setPreferences: (newPrefs: string[]) => void;
+}) {
+  // local state for whatever the user picks
+  const [newPref, setNewPref] = useState<string>("");
+
+  // replace these with your actual preference options
+  const options = ["Vegan", "Vegetarian", "Gluten‑Free", "Keto", "Paleo"];
+
   return (
-    <div id="recipe-preferences-selector" className="profile-card-holder">
-      <Card>
+    <div className="profile-card-holder">
+      <Card id="recipe-profile-preferences" className="profile-card border-0">
         <Card.Body>
           <Card.Title>Preferences</Card.Title>
           <Card.Text>
-            {user.preferences.map((pref) => (
+            {preferences.map((pref) => (
               <PreferenceIconEdit
                 iconType="preference"
                 name={pref}
-                removeSelf={() => {
-                  console.log(`Remove ${pref}`);
-                }}
                 key={pref}
+                removeSelf={() =>
+                  setPreferences(preferences.filter((p) => p !== pref))
+                }
               />
             ))}
           </Card.Text>
+
           <Dropdown>
             <Dropdown.Toggle className="selector-dropdown">
               <Form.Control
-                id="recipe-preferences"
-                placeholder="Preferences"
+                id="recipe-preferences-input"
+                placeholder="Add Preference"
                 className="mb-2"
+                value={newPref}
+                readOnly
               />
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item>Vegan</Dropdown.Item>
-              <Dropdown.Item>Vegetarian</Dropdown.Item>
+              {options.map((opt) => (
+                <Dropdown.Item
+                  key={opt}
+                  onClick={() => {
+                    setNewPref(opt);
+                    if (!preferences.includes(opt)) {
+                      setPreferences([...preferences, opt]);
+                    }
+                  }}
+                >
+                  {opt}
+                </Dropdown.Item>
+              ))}
             </Dropdown.Menu>
           </Dropdown>
         </Card.Body>

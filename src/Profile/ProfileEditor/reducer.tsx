@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import db from "../Database";
+import db from "../../Database";
 
 const initialState = {
     users: db.users, };
@@ -13,6 +13,7 @@ const userSlice = createSlice ({
                 (u : any) => u._id != userId);
         },
         updateUser: (state, { payload: user }) => {
+            console.log("Updating user:", user); // Debugging line
             state.users = state.users.map((u: any) =>
               u._id === user._id ? user : u
             ) as any;

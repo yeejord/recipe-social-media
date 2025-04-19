@@ -1,8 +1,11 @@
 import { Row, Image, Card, InputGroup, Form } from "react-bootstrap";
 import { FaCameraRetro } from "react-icons/fa";
-import { User } from "../../Types/Types";
 
-export default function ProfileBasicInfoEditor({ user }: { user: User }) {
+export default function ProfileBasicInfoEditor({
+  name, setName, username, setUsername}: {
+  name: string; setName: (val: string) => void; username: string; setUsername: (val: string) => void;
+}) {
+
   return (
     <div id="recipe-profile-basic-info">
       <Row>
@@ -15,7 +18,9 @@ export default function ProfileBasicInfoEditor({ user }: { user: User }) {
               <Form.Control
                 placeholder="Name"
                 aria-label="Name"
-                defaultValue={user.name}
+                value={name}
+                onChange={(e) => {setName(e.target.value);}
+                }
               />
             </InputGroup>
             <div>
@@ -25,7 +30,8 @@ export default function ProfileBasicInfoEditor({ user }: { user: User }) {
               <Form.Control
                 placeholder="Username"
                 aria-label="Username"
-                defaultValue={user.username}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </InputGroup>
           </Card>

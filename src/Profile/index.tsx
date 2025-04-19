@@ -3,23 +3,20 @@ import MyProfileViewer from "./MyProfileViewer";
 import ProfileEditor from "./ProfileEditor";
 import UserList from "../UserList";
 import ProfileNavigation from "./ProfileNavigation";
-import RecipeList from "../RecipeList";
-import db from "../Database";
-import { User } from "../Types/Types";
 import { useState } from "react";
-import Recipes from "../Feed/Recipe/Recipes";
 import ProfileMyRecipes from "./MyProfileViewer/ProfileMyRecipes";
 import ProfileMySaved from "./MyProfileViewer/ProfileMySaved";
+import { useSelector } from "react-redux";
 
 export default function Profile() {
   const { userid } = useParams();
-  const users = db.users as User[];
-  const user = users.find((user) => user._id === userid);
+  const { users } = useSelector((state: any) => state.profilesReducer); 
+  const user = users.find((user:any) => user._id === userid);
   if (!user) {
     throw new Error("Could not find user");
   }
-  const followers = users.filter((u) => user.followers.indexOf(u._id) > -1);
-  const followings = users.filter((u) => user.following.indexOf(u._id) > -1);
+  const followers = users.filter((u:any) => user.followers.indexOf(u._id) > -1);
+  const followings = users.filter((u:any) => user.following.indexOf(u._id) > -1);
   const [filter, setFilter] = useState("view");
   return (
     <div>

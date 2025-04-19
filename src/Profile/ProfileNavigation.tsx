@@ -1,10 +1,18 @@
 import { Button, Nav } from "react-bootstrap";
 import { User } from "../Types/Types";
 import db from "../Database";
+import { useSelector } from "react-redux";
 
 export default function ProfileNavigation({ user, filter, setFilter}: any) {
-  const users = db.users as User[];
-  const curUser: User = users[0];
+  const { users } = useSelector((state: any) => state.profilesReducer); 
+  const curUser = users.find((u: any) => u._id === user._id) ?? {
+    _id: "123",
+    name: "",
+    username: "",
+    bio: "",
+    allergies: [],
+    preferences: [],
+  };   
   return (
     <Nav>
       <Nav.Item className="me-2">
