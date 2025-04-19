@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { User } from "../../Types/Types";
 import { setCurrentUser } from "../reducer";
 import { useDispatch } from "react-redux";
+import * as client from "../client";
 
 export default function ProfileBottomBar({ user }: { user: User }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const signout = () => {
+  const signout = async () => {
+    await client.signout();
     dispatch(setCurrentUser(null));
     navigate(`/Signin`);
   };

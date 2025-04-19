@@ -4,12 +4,14 @@ import ProfileEditor from "./ProfileEditor";
 import UserList from "../UserList";
 import ProfileNavigation from "./ProfileNavigation";
 import RecipeList from "../RecipeList";
-import * as db from "../Database";
 import { User } from "../Types/Types";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import * as client from "./client";
+import { useEffect, useState } from "react";
 
 export default function Profile() {
+  const [user, setUser] = useState<User>();
   const { curUser } = useSelector((state: any) => state.userReducer);
   const navigate = useNavigate();
   const { userid } = useParams();
@@ -19,13 +21,23 @@ export default function Profile() {
       navigate(`/profile/${curUser._id}`);
     }
   }
-  const users = db.users as User[];
-  const user = users.find((user) => user._id === userid);
+
+  // Fetches the user with the given user id (or the current user's id)
+  const fetchUser = async (id: string | undefined) => {
+    if (!id) {
+      return;
+    }
+    setUser(await client.findUserById(id));
+  };
+  useEffect(() => {
+    fetchUser(userid);
+  }, [userid]);
   if (!user) {
-    throw new Error("Could not find user");
+    <p>Could not find user</p>;
+    return;
   }
-  const followers = users.filter((u) => user.followers.indexOf(u._id) > -1);
-  const followings = users.filter((u) => user.following.indexOf(u._id) > -1);
+  const followers: User[] = []; //users.filter((u) => user.followers.indexOf(u._id) > -1);
+  const followings: User[] = []; //users.filter((u) => user.following.indexOf(u._id) > -1);
   return (
     <div>
       <ProfileNavigation user={user} />
