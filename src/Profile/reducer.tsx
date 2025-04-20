@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import db from "../Database";
 
 const initialState = {
-    users: db.users, };
+    users: db.users, 
+    currentUser: null, };
 
 const userSlice = createSlice ({
     name: "users",
@@ -34,8 +35,11 @@ const userSlice = createSlice ({
               : u
           );
         },
+        setCurrentUser: (state, action) => {
+          state.currentUser = action.payload;
+        },
     },
 });
 
-export const { deleteUser, editUser, updateUser, addUser, addRecipeToUser } = userSlice.actions;
+export const { deleteUser, editUser, updateUser, addUser, addRecipeToUser, setCurrentUser } = userSlice.actions;
 export default userSlice.reducer;

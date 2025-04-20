@@ -1,6 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { users } from "./Database";
+import db from "./Database";
 import { setCurrentUser } from "./Profile/reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -11,7 +11,7 @@ export default function Signin() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const signin = () => {
-    const user = users.find(
+    const user = db.users.find(
       (u) => u.username === username && u.password === password
     );
     if (!user) return;
@@ -38,11 +38,11 @@ export default function Signin() {
         />
         <Button
           id="recipe-signin-btn"
-          to="/Feed"
           onClick={signin}
           className="btn btn-primary w-100 mb-2"
         >
           Sign in
+          navigate('/Feed');
         </Button>
         <Link id="recipe-signup-link" to="/Signup">
           Sign up
