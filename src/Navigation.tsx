@@ -5,10 +5,10 @@ import { Link, useLocation } from "react-router-dom";
 export default function Navigation() {
   const { pathname } = useLocation();
   const links = [
-    { label: "Feed", path: "/Feed"},
-    { label: "Profile", path: "/Profile/123"},
-    { label: "New Recipe", path: "/NewRecipe"},
-    { label: "Sign Out", path: "/Signin"},
+    { label: "Feed", path: "/Feed" },
+    { label: "Profile", path: "/Profile" },
+    { label: "New Recipe", path: "/NewRecipe" },
+    { label: "Sign Out", path: "/Signin" },
   ];
   return (
     <div
@@ -28,14 +28,18 @@ export default function Navigation() {
       </InputGroup>
       {links.map((link) => (
         <Link
-        to={link.path}
-        id="rs-feed-link"
-        className={`list-group-item text-center border-0 bg-black text-white
-          ${pathname.includes(link.path) ? "text-white bg-black text-decoration-underline" : "text-white bg-black"}`}>
-        {link.label} 
-      </Link>
+          to={link.path}
+          id="rs-feed-link"
+          className={`list-group-item text-center border-0 bg-black text-white
+          ${
+            pathname.includes(link.path)
+              ? "text-white bg-black text-decoration-underline"
+              : "text-white bg-black"
+          }`}
+        >
+          {link.label}
+        </Link>
       ))}
-      
     </div>
   );
 }

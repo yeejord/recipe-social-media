@@ -1,22 +1,21 @@
 import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { users } from "./Database";
 import { setCurrentUser } from "./Profile/reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import * as client from "./Profile/client";
 
 export default function Signin() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const signin = () => {
-    const user = users.find(
-      (u) => u.username === username && u.password === password
-    );
+  const signin = async () => {
+    const user = await client.signin({ username, password });
     if (!user) return;
     dispatch(setCurrentUser(user));
-    navigate(`/Profile/${user._id}`);
+    console.log("dispatch(setCurrentUser signin");
+    navigate(`/Feed`);
   };
   return (
     <div id="recipe-signin-screen">
@@ -38,7 +37,6 @@ export default function Signin() {
         />
         <Button
           id="recipe-signin-btn"
-          to="/Feed"
           onClick={signin}
           className="btn btn-primary w-100 mb-2"
         >

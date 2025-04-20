@@ -1,6 +1,46 @@
 [
-    { "_id": "R1", "owner": "123", "name": "Baked Ziti", "description": "a cheesy baked pasta dish", "ingredients": "pasta, ricotta, sauce, etc", "steps": "", "link": "", "stars": 4},
-    { "_id": "R2", "owner": "123", "name": "chocolate chip cookies", "description": "gooey perfection", "ingredients": "butter, flour, sugar, egg, chocolate chips, etc", "stars": 3},
-    { "_id": "R3", "owner": "123", "name": "breaded chicken cutlets", "description": "crispy, double breaded and fried chicken", "ingredients": "chicken breast, egg, flour, bread crumbs, oil, etc", "stars": 5},
-    { "_id": "R4", "owner": "124", "name": "tomato and beef rice dish", "description": "chinese cuisine inspired rice dish", "ingredients": "white rice, beef, tomato, etc", "stars": 3}
+  {
+    "_id": "R1",
+    "owner": "123",
+    "name": "Baked Ziti",
+    "description": "a cheesy baked pasta dish",
+    "ingredients": "pasta, ricotta, sauce, etc",
+    "steps": "",
+    "link": "",
+    "stars": 4
+  },
+  {
+    "_id": "R2",
+    "owner": "123",
+    "name": "chocolate chip cookies",
+    "description": "gooey perfection",
+    "ingredients": "butter, flour, sugar, egg, chocolate chips, etc",
+    "stars": 3
+  },
+  {
+    "_id": "R3",
+    "owner": "123",
+    "name": "breaded chicken cutlets",
+    "description": "crispy, double breaded and fried chicken",
+    "ingredients": "chicken breast, egg, flour, bread crumbs, oil, etc",
+    "stars": 5
+  },
+  {
+    "_id": "R4",
+    "owner": "124",
+    "name": "tomato and beef rice dish",
+    "description": "chinese cuisine inspired rice dish",
+    "ingredients": "white rice, beef, tomato, etc",
+    "stars": 3
+  },
+  {
+    "_id": "R5",
+    "owner": "124",
+    "name": "rice with onion",
+    "ingredients": "- rice\n- neutral oil\n- half an onion",
+    "steps": "1. Cook the rice\n2. Slice the onion\n3. Fry the onion in the oil in a pan\n4. Place the rice into the pan with the oil and mix",
+    "link": "https://www.allrecipes.com/recipe/18316/onion-rice/",
+    "description": "Delicious rice, would highly recommend",
+    "stars": 5
+  }
 ]

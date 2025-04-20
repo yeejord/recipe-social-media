@@ -9,16 +9,10 @@ import { User } from "../../Types/Types";
 import { useSelector } from "react-redux";
 
 export default function MyProfileViewer({ user }: { user: User }) {
-
-  const { users } = useSelector((state: any) => state.profilesReducer); 
-  const curUser = users.find((u: any) => u._id === user._id) ?? {
-    _id: "123",
-    name: "",
-    username: "",
-    bio: "",
-    allergies: [],
-    preferences: [],
-  };   
+  const { curUser } = useSelector((state: any) => state.userReducer);
+  if (!!curUser && user._id === curUser._id) {
+    user = curUser;
+  }
   return (
     <div id="recipe-profile">
       <Row id="recipe-profile-main">
@@ -49,7 +43,9 @@ export default function MyProfileViewer({ user }: { user: User }) {
           </Row>
         </Col>
       </Row>
-      {curUser._id === user._id && <ProfileBottomBar user={user} />}
+      {!!curUser && curUser._id === user._id && (
+        <ProfileBottomBar user={user} />
+      )}
     </div>
   );
 }

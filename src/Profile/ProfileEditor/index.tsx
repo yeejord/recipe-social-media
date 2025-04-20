@@ -9,8 +9,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateUser } from "./reducer";
 import { useState } from "react";
 
-export default function ProfileEditor({userid,}: {userid: string | undefined;}) {
-  const { users } = useSelector((state: any) => state.profilesReducer); 
+export default function ProfileEditor({
+  userid,
+}: {
+  userid: string | undefined;
+}) {
+  const { users } = useSelector((state: any) => state.profilesReducer);
   const curUser = users.find((u: any) => u._id === "123") ?? {
     _id: "123",
     name: "",
@@ -18,7 +22,7 @@ export default function ProfileEditor({userid,}: {userid: string | undefined;}) 
     bio: "",
     allergies: [],
     preferences: [],
-  };   
+  };
 
   const dispatch = useDispatch();
 
@@ -37,9 +41,9 @@ export default function ProfileEditor({userid,}: {userid: string | undefined;}) 
       allergies,
       preferences,
     };
-  
-    console.log("Saving changes... Dispatching user:", updatedUser);  // Log the user being dispatched
-  
+
+    console.log("Saving changes... Dispatching user:", updatedUser); // Log the user being dispatched
+
     dispatch(updateUser(updatedUser));
   };
 
@@ -50,20 +54,28 @@ export default function ProfileEditor({userid,}: {userid: string | undefined;}) 
       )}
       <Row id="recipe-profile-main">
         <Col md={4}>
-          <ProfileBasicInfoEditor name={name}
+          <ProfileBasicInfoEditor
+            name={name}
             setName={setName}
             username={username}
-            setUsername={setUsername} />
+            setUsername={setUsername}
+          />
         </Col>
         <Col md={8}>
           <Row>
             <BioEditor bio={bio} setBio={setBio} />
-            <AllergiesSelector allergies={allergies} setAllergies={setAllergies}/>
-            <PreferencesSelector preferences={preferences} setPreferences={setPreferences} />
-          </Row> 
+            <AllergiesSelector
+              allergies={allergies}
+              setAllergies={setAllergies}
+            />
+            <PreferencesSelector
+              preferences={preferences}
+              setPreferences={setPreferences}
+            />
+          </Row>
         </Col>
       </Row>
-      <ProfileEditorBottomBar user={curUser} onSave={handleSave}/>
+      <ProfileEditorBottomBar user={curUser} onSave={handleSave} />
     </div>
   );
 }

@@ -2,10 +2,16 @@ import { Row, Image, Card, InputGroup, Form } from "react-bootstrap";
 import { FaCameraRetro } from "react-icons/fa";
 
 export default function ProfileBasicInfoEditor({
-  name, setName, username, setUsername}: {
-  name: string; setName: (val: string) => void; username: string; setUsername: (val: string) => void;
+  name,
+  setName,
+  username,
+  setUsername,
+}: {
+  name: string;
+  setName: (val: string) => void;
+  username: string;
+  setUsername: (val: string) => void;
 }) {
-
   return (
     <div id="recipe-profile-basic-info">
       <Row>
@@ -19,8 +25,9 @@ export default function ProfileBasicInfoEditor({
                 placeholder="Name"
                 aria-label="Name"
                 value={name}
-                onChange={(e) => {setName(e.target.value);}
-                }
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
               />
             </InputGroup>
             <div>
@@ -30,26 +37,26 @@ export default function ProfileBasicInfoEditor({
               <Form.Control
                 placeholder="Username"
                 aria-label="Username"
-                value={username
+                value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
             </InputGroup>
           </Card>
-        </div>
-      </Row>
-      <Row className="profile-image-holder">
-        <div className="profile-image-edit-holder">
-          <Image
-            src="../../images/DetectiveClock.png"
-            fluid
-            roundedCircle
-            className="profile-image-edit"
-            id="recipe-profile-basic-info-image"
-          />
-          <FaCameraRetro className="fs-1 image-edit-cam text-black" />
-        </div>
+          <Row className="profile-image-holder">
+            <div className="profile-image-edit-holder">
+              <Image
+                src="../../images/DetectiveClock.png"
+                fluid
+                roundedCircle
+                className="profile-image-edit"
+                id="recipe-profile-basic-info-image"
+              />
+              <FaCameraRetro className="fs-1 image-edit-cam text-black" />
+            </div>
 
-        <p>Insert image above</p>
+            <p>Insert image above</p>
+          </Row>
+        </div>
       </Row>
     </div>
   );
