@@ -32,9 +32,6 @@ export interface User {
   role: UserRole;
   allergies: UserAllergies[];
   preferences: UserPreferences[];
-  following: string[];
-  followers: string[];
-  myRecipes: string[];
   savedRecipes: string[];
 }
 

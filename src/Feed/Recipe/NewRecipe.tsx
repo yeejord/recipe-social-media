@@ -4,8 +4,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import db from "../../Database";
 import { useState } from "react";
 import * as client from "../client";
+import { useSelector } from "react-redux";
 
 export default function NewRecipe() {
+  const { currentUser } = useSelector((state: any) => state.userReducer);
   const { recipeid } = useParams();
   const navigate = useNavigate();
 
@@ -26,6 +28,7 @@ export default function NewRecipe() {
       ingredients,
       steps,
       link,
+      owner: currentUser._id,
     };
     client.createRecipe(newRecipe);
     navigate("/Feed");

@@ -23,6 +23,8 @@ export default function Profile() {
   const { currentUser } = useSelector((state: any) => state.userReducer);
   // If there is no user id navigate to the current user
   const [user, setUser] = useState<User>();
+  const [followers, setFollowers] = useState<User[]>([]);
+  const [followings, setFollowings] = useState<User[]>([]);
   const { userid } = useParams();
   const navigate = useNavigate();
   console.log("currentUser = ");
@@ -39,6 +41,8 @@ export default function Profile() {
     // Fetch user if the user id is defined. Otherwise use
     // the curUser
     setUser(await client.findUserById(id));
+    setFollowers(await client.followers(id));
+    setFollowings(await client.following(id));
   };
   useEffect(() => {
     fetchUsers(userid);
@@ -49,12 +53,6 @@ export default function Profile() {
     return;
   }
   console.log("Profile Page Bottom Code");
-  const followers: User[] = (allUsers ?? []).filter(
-    (u: any) => (user.followers ?? []).indexOf(u._id) > -1
-  );
-  const followings: User[] = (allUsers ?? []).filter(
-    (u: any) => (user.following ?? []).indexOf(u._id) > -1
-  );
   console.log("Profile Page End Code");
   return (
     <div>

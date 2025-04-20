@@ -60,26 +60,33 @@ export const signout = async () => {
 };
 export const following = async (userId: string) => {
   const response = await axiosWithCredentials.get(
-    `${USERS_API}/${userId}/myfollowers`
+    `${USERS_API}/${userId}/myfollowing`
+  );
+  return response.data;
+};
+
+export const amFollowing = async (userId: string) => {
+  const response = await axiosWithCredentials.get(
+    `${USERS_API}/amfollowing/${userId}`
   );
   return response.data;
 };
 
 export const followers = async (userId: string) => {
   const { data } = await axiosWithCredentials.get(
-    `${USERS_API}/${userId}/myfollowing`
+    `${USERS_API}/${userId}/myfollowers`
   );
   return data;
 };
-export const follow = async (fromId: string, toId: string) => {
-  const response = await axiosWithCredentials.post(
-    `${USERS_API}/${fromId}/follow/${toId}`
+export const follow = async (toId: string) => {
+  const response = await axiosWithCredentials.put(
+    `${USERS_API}/follow/${toId}`
   );
   return response.data;
 };
-export const unfollow = async (fromId: string, toId: string) => {
-  const response = await axiosWithCredentials.delete(
-    `${USERS_API}/${fromId}/unfollow/${toId}`
+export const unfollow = async (toId: string) => {
+  const response = await axiosWithCredentials.put(
+    `${USERS_API}/unfollow/${toId}`
   );
   return response.data;
 };

@@ -25,9 +25,6 @@ export default function Signup() {
       role: "User",
       allergies: [],
       preferences: [],
-      following: [],
-      followers: [],
-      myRecipes: [],
       savedRecipes: [],
     };
     const user = await client.signup(inputtedUser);
