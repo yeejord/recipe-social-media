@@ -46,6 +46,7 @@ export default function UserCard({ user }: { user: User }) {
                 </Link>
                 <Row className="justify-content-center">
                   <Col xs="auto">
+                  {(currentUser && currentUser.role === "Admin" && (
                     <div className="d-inline-flex align-items-center btn p-1"
                       onClick={() => dispatch(deleteUser(curUser._id))}>
                       <FaTrash
@@ -54,7 +55,7 @@ export default function UserCard({ user }: { user: User }) {
                         size={18}
                       />
                       <span className="ms-2 text-danger">Delete User</span>
-                    </div>
+                    </div>))}
                   </Col>
                 </Row>
               </Col>

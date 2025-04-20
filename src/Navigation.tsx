@@ -1,21 +1,25 @@
-import { Button, FormControl, InputGroup } from "react-bootstrap";
+import { FormControl, InputGroup } from "react-bootstrap";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Navigation({
+  
   search,
   setSearch,
 }: {
   search: string;
   setSearch: (searchVal: string) => void;
 }) {
+  const { currentUser } = useSelector((state: any) => state.profilesReducer);
   const { pathname } = useLocation();
   const links = [
     { label: "Feed", path: "/Feed" },
     { label: "Profile", path: "/Profile" },
     { label: "New Recipe", path: "/NewRecipe" },
-    { label: "Sign Out", path: "/Signin" },
+    { label: currentUser ? "Sign Out" : "Sign In", path: "/Signin" },
   ];
+  
   return (
     <div
       id="rs-navigation"
@@ -24,7 +28,7 @@ export default function Navigation({
       z-index={5}
     >
       <div className="ms-2 text-white">
-        <h4>Recipz</h4>
+        <h4>Recipez</h4>
       </div>
       <InputGroup size="sm" className="ms-4 me-4 bg-white" id="wd-search-bar">
         <InputGroup.Text>
