@@ -1,6 +1,5 @@
 import { Row, Image, Card, InputGroup, Form } from "react-bootstrap";
 import { FaCameraRetro } from "react-icons/fa";
-import { User } from "../../Types/Types";
 
 export default function ProfileBasicInfoEditor({
   username,
@@ -35,6 +34,20 @@ export default function ProfileBasicInfoEditor({
               />
             </InputGroup>
           </Card>
+          <Row className="profile-image-holder">
+            <div className="profile-image-edit-holder">
+              <Image
+                src="../../images/DetectiveClock.png"
+                fluid
+                roundedCircle
+                className="profile-image-edit"
+                id="recipe-profile-basic-info-image"
+              />
+              <FaCameraRetro className="fs-1 image-edit-cam text-black" />
+            </div>
+
+            <p>Insert image above</p>
+          </Row>
         </div>
       </Row>
     </div>
