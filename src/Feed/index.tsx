@@ -15,6 +15,10 @@ export default function Feed({ search }: { search: string }) {
   const fetchFeed = async (search: string) => {
     setRecipes(await client.getFeed(currentUser._id, search));
     setAllRecipes(await client.getAllRecipes(search));
+    console.log("recipes = ");
+    console.log(recipes);
+    console.log("allRecipes = ");
+    console.log(allRecipes);
   };
   useEffect(() => {
     fetchFeed(search);

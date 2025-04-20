@@ -35,7 +35,7 @@ export default function Recipes({
         setFilteredRecipes(savedRecipes);
         break;
     }
-  }, [filter]);
+  }, [filter, recipes, allRecipes, savedRecipes]);
 
   return (
     <div id="rs-recipe-list">
