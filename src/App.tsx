@@ -42,7 +42,10 @@ export default function App() {
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/RecipeList" element={<RecipeList />} />
                 <Route path="/Recipe/:recipeid/*" element={<RecipeViewer />} />
-                <Route path="/Feed" element={<Feed search={search} />} />
+                <Route
+                  path="/Feed"
+                  element={<Feed search={search} setSearch={setSearch} />}
+                />
                 <Route path="/NewRecipe" element={<NewRecipe />} />
                 <Route
                   path="/Feed/EditRecipe/:recipeid/*"

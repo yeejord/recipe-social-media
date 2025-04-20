@@ -1,4 +1,4 @@
-import { FormControl, InputGroup } from "react-bootstrap";
+import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
 
@@ -35,6 +35,9 @@ export default function Navigation({
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        <Link className="btn btn-primary" to={`Feed/?search=${search}`}>
+          Search!
+        </Link>
       </InputGroup>
       {links.map((link) => (
         <Link
