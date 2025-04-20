@@ -2,11 +2,11 @@ import { useState } from "react";
 import { FormControl, InputGroup } from "react-bootstrap";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navigation() {
-  const { search } = useParams();
-  const [searchVal, setSearchVal] = useState<string>(search ?? "");
+  const [searchVal, setSearchVal] = useState<string>("");
+  console.log(`searchVal = ${searchVal}`);
   const { currentUser } = useSelector((state: any) => state.profilesReducer);
   const { pathname } = useLocation();
   const links = [
@@ -15,7 +15,7 @@ export default function Navigation() {
     { label: "New Recipe", path: "/NewRecipe" },
     { label: currentUser ? "Sign Out" : "Sign In", path: "/Signin" },
   ];
-  
+
   return (
     <div
       id="rs-navigation"
