@@ -102,7 +102,13 @@ export const unsaveRecipe = async (recipeId: string) => {
   );
   return response.data;
 };
-export const savedRecipesFor = async (userId: string) => {
+export const savedRecipesFor = async (userId: string, search: string = "") => {
+  if (search) {
+    const response = await axios.get(
+      `${USERS_API}/savedRecipes/${userId}/?search=${search}`
+    );
+    return response.data;
+  }
   const response = await axios.get(`${USERS_API}/savedRecipes/${userId}`);
   return response.data;
 };

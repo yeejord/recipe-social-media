@@ -3,18 +3,25 @@ export const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
 export const RECIPES_API = `${REMOTE_SERVER}/api/recipes`;
 const axiosWithCredentials = axios.create({ withCredentials: true });
 
-export const getFeed = async (userid: string) => {
+export const getFeed = async (userid: string, search: string = "") => {
+  if (search) {
+    const response = await axiosWithCredentials.get(
+      `${RECIPES_API}/${userid}/?search=${search}`
+    );
+    return response.data;
+  }
   const response = await axiosWithCredentials.get(`${RECIPES_API}/${userid}`);
   return response.data;
 };
 
-export const getAllRecipes = async () => {
+export const getAllRecipes = async (search: string = "") => {
+  if (search) {
+    const response = await axiosWithCredentials.get(
+      `${RECIPES_API}/?search=${search}`
+    );
+    return response.data;
+  }
   const response = await axiosWithCredentials.get(`${RECIPES_API}`);
-  return response.data;
-};
-
-export const findRecipesByPartialName = async (name: string) => {
-  const response = await axios.get(`${RECIPES_API}?name=${name}`);
   return response.data;
 };
 
