@@ -38,7 +38,7 @@ export default function App() {
                 <Route
                   path="/NewRecipe"
                   element={
-                    <ProtectedRoute>
+                    <ProtectedRoute userOnly={true}>
                       <NewRecipe />
                     </ProtectedRoute>
                   }
@@ -54,7 +54,7 @@ export default function App() {
                 <Route
                   path="/Profile"
                   element={
-                    <ProtectedRoute>
+                    <ProtectedRoute userOnly={false}>
                       <Profile />
                     </ProtectedRoute>
                   }
