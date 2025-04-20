@@ -1,41 +1,49 @@
 import { ListGroup } from "react-bootstrap";
 import { FaBookmark, FaRegBookmark, FaStar, FaTrash } from "react-icons/fa";
-import { deleteRecipe, setAllRecipes } from "../reducer";
+import { deleteRecipe, setAllRecipes, setFeedIds } from "../reducer";
 import "./../feed.css";
 import { useDispatch, useSelector } from "react-redux";
 import { FaPencil } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import * as client from "../client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setCurrentUser } from "../../Profile/reducer";
 import * as userClient from "../../Profile/client";
 
-export default function Recipes({
-  filter,
-  search,
-}: {
-  filter: string;
-  search: string;
-}) {
-  const { recipes } = useSelector((state: any) => state.recipesReducer);
+export default function Recipes({ filter }: { filter: string }) {
+  const { search } = useParams();
+  const { recipes, feedIds } = useSelector(
+    (state: any) => state.recipesReducer
+  );
   const { currentUser } = useSelector((state: any) => state.profilesReducer);
   const dispatch = useDispatch();
+  const [searchedRecipes, setSearchedRecipes] = useState<any[]>();
 
   const fetchFeed = async (search: string) => {
-    const recipes = await client.getFeed(currentUser._id, search);
-    dispatch(setAllRecipes(recipes));
+    const fetchedRecipes = await client.getAllRecipes();
+    if (!!currentUser) {
+      const recipesFeedIds = (
+        await client.getFeed(currentUser._id, search)
+      ).map((r: any) => r._id);
+      dispatch(setFeedIds(recipesFeedIds));
+    }
+    dispatch(setAllRecipes(fetchedRecipes));
+    console.log("Try get search");
+    setSearchedRecipes(await client.getAllRecipes(search));
   };
   useEffect(() => {
-    fetchFeed(search);
+    fetchFeed(search ?? "");
   }, [filter, search]);
 
-  const filteredRecipes = recipes.filter((recipe: any) => {
-    if (filter === "feed") return true;
-    if (filter === "mine") return recipe.owner === currentUser._id;
-    if (filter === "saved")
-      return currentUser?.savedRecipes?.includes(recipe._id);
-    return true;
-  });
+  const filteredRecipes = (search ? searchedRecipes : recipes).filter(
+    (recipe: any) => {
+      if (filter === "feed") return feedIds.includes(recipe._id);
+      if (filter === "mine") return recipe.owner === currentUser._id;
+      if (filter === "saved")
+        return currentUser?.savedRecipes?.includes(recipe._id);
+      return true;
+    }
+  );
 
   const toggleSaveRecipe = (recipeId: string) => {
     if (!currentUser) return;
