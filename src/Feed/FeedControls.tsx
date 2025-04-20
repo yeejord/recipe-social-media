@@ -1,11 +1,15 @@
 import { Button } from "react-bootstrap";
 import { CiBookmark } from "react-icons/ci";
 import { FaRegNewspaper } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 export default function FeedControls({ filter, setFilter }: any) {
+
+  const { currentUser } = useSelector((state: any) => state.profilesReducer);
+  
   return (
     <div id="rs-feed-controls" className="mb-4">
-      <Button
+      {currentUser && (<Button
         variant={filter === "feed" ? "primary" : "secondary"}
         size="lg"
         className={`me-1 border-0`}
@@ -13,7 +17,7 @@ export default function FeedControls({ filter, setFilter }: any) {
         onClick={() => setFilter("feed")}
       >
         My Feed
-      </Button>
+      </Button>)}
       <Button
         variant={filter === "all" ? "primary" : "secondary"}
         size="lg"
@@ -23,7 +27,7 @@ export default function FeedControls({ filter, setFilter }: any) {
       >
         All
       </Button>
-      <Button
+      {currentUser && (<Button
         size="lg"
         variant={filter === "mine" ? "primary" : "secondary"}
         className={`position-relative me-2`}
@@ -35,8 +39,8 @@ export default function FeedControls({ filter, setFilter }: any) {
           style={{ bottom: "1px" }}
         />
         My Recipes
-      </Button>
-      <Button
+      </Button>)}
+      {currentUser && (<Button
         variant={filter === "saved" ? "primary" : "secondary"}
         size="lg"
         className={`position-relative me-2`}
@@ -48,7 +52,7 @@ export default function FeedControls({ filter, setFilter }: any) {
           style={{ bottom: "1px" }}
         />
         Saved
-      </Button>
+      </Button>)}
     </div>
   );
 }
