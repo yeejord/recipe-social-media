@@ -17,7 +17,6 @@ import { useEffect, useState } from "react";
 import { User } from "../Types/Types";
 
 export default function Profile() {
-  console.log("Profile Page");
   const [filter, setFilter] = useState("view");
   const [allUsers, setAllUsers] = useState<User[]>();
   const { currentUser } = useSelector((state: any) => state.userReducer);
@@ -27,17 +26,13 @@ export default function Profile() {
   const [followings, setFollowings] = useState<User[]>([]);
   const { userid } = useParams();
   const navigate = useNavigate();
-  console.log("currentUser = ");
-  console.log(currentUser);
   // Fetches the user with the given user id (or the current user's id)
   const fetchUsers = async (id: string | undefined) => {
-    console.log("Fetch Users");
     setAllUsers(await client.findAllUsers());
     if (!id) {
       navigate(`/profile/${currentUser._id}/View`);
       return;
     }
-    console.log("Fetch User");
     // Fetch user if the user id is defined. Otherwise use
     // the curUser
     setUser(await client.findUserById(id));
@@ -46,14 +41,11 @@ export default function Profile() {
   };
   useEffect(() => {
     fetchUsers(userid);
-  }, [userid]);
+  }, [userid, filter]);
   if (!user) {
-    console.log("Could not find user");
     <p>Could not find user</p>;
     return;
   }
-  console.log("Profile Page Bottom Code");
-  console.log("Profile Page End Code");
   return (
     <div>
       <h1>Profile</h1>

@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import FeedControls from "./FeedControls";
 import Recipes from "./Recipe/Recipes";
 import * as client from "./client";
+import * as userClient from "../Profile/client";
 import { useSelector } from "react-redux";
 
 export default function Feed() {
   const [filter, setFilter] = useState("feed");
   const [recipes, setRecipes] = useState();
+  const [savedRecipes, setSavedRecipes] = useState();
   const [allRecipes, setAllRecipes] = useState();
   const { currentUser } = useSelector((state: any) => state.userReducer);
 
@@ -17,6 +19,14 @@ export default function Feed() {
   useEffect(() => {
     fetchFeed();
   }, [filter]);
+  const fetchSavedRecipes = async () => {
+    setSavedRecipes(await userClient.savedRecipesFor(currentUser._id));
+    console.log("savedRecipes = ");
+    console.log(savedRecipes);
+  };
+  useEffect(() => {
+    fetchSavedRecipes();
+  }, []);
 
   if (!recipes && !allRecipes) {
     return <p>No recipes loaded</p>;
@@ -30,6 +40,7 @@ export default function Feed() {
         filter={filter}
         recipes={recipes ?? []}
         allRecipes={allRecipes ?? []}
+        savedRecipes={savedRecipes ?? []}
       />
     </div>
   );

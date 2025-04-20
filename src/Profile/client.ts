@@ -90,3 +90,19 @@ export const unfollow = async (toId: string) => {
   );
   return response.data;
 };
+export const saveRecipe = async (recipeId: string) => {
+  const response = await axiosWithCredentials.put(
+    `${USERS_API}/saveRecipe/${recipeId}`
+  );
+  return response.data;
+};
+export const unsaveRecipe = async (recipeId: string) => {
+  const response = await axiosWithCredentials.put(
+    `${USERS_API}/unsaveRecipe/${recipeId}`
+  );
+  return response.data;
+};
+export const savedRecipesFor = async (userId: string) => {
+  const response = await axios.get(`${USERS_API}/savedRecipes/${userId}`);
+  return response.data;
+};

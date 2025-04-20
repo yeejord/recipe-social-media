@@ -6,8 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaPencil } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import SaveRecipeButton from "./SaveRecipeButton";
 
-export default function Recipes({ recipes, filter, allRecipes }: any) {
+export default function Recipes({
+  recipes,
+  filter,
+  allRecipes,
+  savedRecipes,
+}: any) {
   const { currentUser } = useSelector((state: any) => state.userReducer);
   const dispatch = useDispatch();
   const [filteredRecipes, setFilteredRecipes] = useState<any[]>([]);
@@ -26,11 +32,7 @@ export default function Recipes({ recipes, filter, allRecipes }: any) {
         );
         break;
       case "saved":
-        setFilteredRecipes(
-          allRecipes.filter((recipe: any) =>
-            currentUser?.savedRecipes?.includes(recipe._id)
-          )
-        );
+        setFilteredRecipes(savedRecipes);
         break;
     }
   }, [filter]);
@@ -67,6 +69,11 @@ export default function Recipes({ recipes, filter, allRecipes }: any) {
                     >
                       See More Details
                     </Link>
+                    <SaveRecipeButton
+                      recipeId={recipe._id}
+                      savedRecipes={savedRecipes}
+                      key={recipe._id}
+                    />
                     <div className="btn">
                       <FaTrash
                         onClick={() => dispatch(deleteRecipe(recipe._id))}
