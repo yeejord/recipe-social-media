@@ -16,7 +16,7 @@ export default function Signin() {
     const savedRecipes = await client.savedRecipesFor(user._id);
     const savedRecipeIds = savedRecipes.map((r: any) => r._id);
     dispatch(setCurrentUser({ ...user, savedRecipes: savedRecipeIds }));
-    navigate(`/Feed`);
+    navigate("/Feed");
   };
   return (
     <div id="recipe-signin-screen">
@@ -41,7 +41,7 @@ export default function Signin() {
           onClick={signin}
           className="btn btn-primary w-100 mb-2"
         >
-          Sign in navigate('/Feed');
+          Sign in
         </Button>
         <Link id="recipe-signup-link" to="/Signup">
           Sign up
