@@ -1,6 +1,7 @@
 import { useState } from "react";
 import FeedControls from "./FeedControls";
 import Recipes from "./Recipe/Recipes";
+import { useParams } from "react-router-dom";
 
 export default function Feed() {
     const [filter, setFilter] = useState("all");

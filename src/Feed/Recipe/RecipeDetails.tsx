@@ -9,36 +9,47 @@ export default function RecipeDetails() {
     const navigate = useNavigate();
     const recipe = db.recipes.find((r: any) => r._id === recipeid);
 
-    return (
-        <div id="rs-new-recipe">
-            <Row>
-                <Col md={3} className="d-flex align-items-start justify-content-center">
-                    <img
-                        src="/images/baked-ziti.jpg"
-                        alt="Recipe"
-                        className="img-fluid rounded shadow"
-                    />
-                </Col>
-                <Col md={8}>
-                    <div className="mb-2" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                        <h1>{recipe?.name}</h1>
-                        <div className="ms-3 d-flex align-items-center">
-                            {Array.from({ length: recipe?.stars || 0 }).map((_, index) => (
-                                <FaStar key={index} style={{ color: "gold", fontSize: "2rem" }} />
-                            ))}
-                        </div>
-                        <Link to={`/Feed/EditRecipe/${recipe?._id}`} className="btn border-0">
-                            <FaPencil 
-                            style={{ cursor: "pointer", color: "blue" }}
-                            title="Edit Recipe"
-                            size={18}
-                            />
-                        </Link>
-                    </div>
-
-                    <div className="mb-4">
-                        <h4>{recipe?.description}</h4>
-                    </div>
+  return (
+    <div id="rs-new-recipe">
+      <Row>
+        <Col md={3} className="d-flex align-items-start justify-content-center">
+          <img
+            src="/images/baked-ziti.jpg"
+            alt="Recipe"
+            className="img-fluid rounded shadow"
+          />
+        </Col>
+        <Col md={8}>
+          <div
+            className="mb-2"
+            style={{ display: "flex", alignItems: "center", gap: "10px" }}
+          >
+            <h1>{recipe?.name}</h1>
+            <div className="ms-3 d-flex align-items-center">
+              {Array.from({ length: recipe?.stars || 0 }).map((_, index) => (
+                <FaStar
+                  key={index}
+                  style={{ color: "gold", fontSize: "2rem" }}
+                />
+              ))}
+            </div>
+              <Link
+                to={`/Feed/EditRecipe/${recipe?._id}`}
+                className="btn border-0"
+              >
+                <FaPencil
+                  style={{ cursor: "pointer", color: "blue" }}
+                  title="Edit Recipe"
+                  size={18}
+                />
+              </Link>
+          </div>
+          <div>
+            <h6 className="d-inline me-1">uploaded by</h6>
+          </div>
+          <div className="mb-4">
+            <h4>{recipe?.description}</h4>
+          </div>
 
                     <div className="mb-4">
                         <h5>Ingredients needed:</h5>
