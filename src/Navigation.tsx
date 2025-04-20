@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { FormControl, InputGroup } from "react-bootstrap";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navigation() {
-  const { search } = useParams();
-  const [searchVal, setSearchVal] = useState<string>(search ?? "");
+  const [searchVal, setSearchVal] = useState<string>("");
+  console.log(`searchVal = ${searchVal}`);
   const { pathname } = useLocation();
   const links = [
     { label: "Feed", path: "/Feed" },

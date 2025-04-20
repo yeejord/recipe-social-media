@@ -17,7 +17,7 @@ export default function Recipes({ filter }: { filter: string }) {
   );
   const { currentUser } = useSelector((state: any) => state.profilesReducer);
   const dispatch = useDispatch();
-  const [searchedRecipes, setSearchedRecipes] = useState<any[]>();
+  const [searchedRecipes, setSearchedRecipes] = useState<any[]>([]);
 
   const fetchFeed = async (search: string) => {
     const fetchedRecipes = await client.getAllRecipes();
@@ -102,44 +102,50 @@ export default function Recipes({ filter }: { filter: string }) {
                     >
                       See More Details
                     </Link>
-                    {(currentUser && (currentUser._id === recipe.owner || currentUser.role === "Admin")) && (
-                    <>
-                      <div className="btn">
-                        <FaTrash
-                          onClick={() => deleteRecipeButton(recipe)}
-                          style={{ cursor: "pointer", color: "red" }}
-                          title="Delete Recipe"
-                          size={18}
-                        />
-                      </div>
-                      <Link
-                        to={`/Feed/EditRecipe/${recipe._id}`}
-                        className="btn border-0"
-                      >
-                        <FaPencil
-                          style={{ cursor: "pointer", color: "blue" }}
-                          title="Edit Recipe"
-                          size={18}
-                        />
-                      </Link>
-                    </>
-                    )}
-                    {(currentUser && (
-                    <button
-                      className="btn border-0"
-                      onClick={() => toggleSaveRecipe(recipe._id)}
-                      title={
-                        currentUser?.savedRecipes?.includes(recipe._id)
-                          ? "Unsave Recipe"
-                          : "Save Recipe"
-                      }
-                    >
-                      {currentUser?.savedRecipes?.includes(recipe._id) ? (
-                        <FaBookmark size={18} style={{ color: "dodgerblue" }} />
-                      ) : (
-                        <FaRegBookmark size={18} style={{ color: "gray" }} />
+                    {currentUser &&
+                      (currentUser._id === recipe.owner ||
+                        currentUser.role === "Admin") && (
+                        <>
+                          <div className="btn">
+                            <FaTrash
+                              onClick={() => deleteRecipeButton(recipe)}
+                              style={{ cursor: "pointer", color: "red" }}
+                              title="Delete Recipe"
+                              size={18}
+                            />
+                          </div>
+                          <Link
+                            to={`/Feed/EditRecipe/${recipe._id}`}
+                            className="btn border-0"
+                          >
+                            <FaPencil
+                              style={{ cursor: "pointer", color: "blue" }}
+                              title="Edit Recipe"
+                              size={18}
+                            />
+                          </Link>
+                        </>
                       )}
-                    </button>))}
+                    {currentUser && (
+                      <button
+                        className="btn border-0"
+                        onClick={() => toggleSaveRecipe(recipe._id)}
+                        title={
+                          currentUser?.savedRecipes?.includes(recipe._id)
+                            ? "Unsave Recipe"
+                            : "Save Recipe"
+                        }
+                      >
+                        {currentUser?.savedRecipes?.includes(recipe._id) ? (
+                          <FaBookmark
+                            size={18}
+                            style={{ color: "dodgerblue" }}
+                          />
+                        ) : (
+                          <FaRegBookmark size={18} style={{ color: "gray" }} />
+                        )}
+                      </button>
+                    )}
                   </div>
                 </div>
                 <img
