@@ -36,6 +36,7 @@ export default function Signin() {
         />
         <Button
           id="recipe-signin-btn"
+          to="/Feed"
           onClick={signin}
           className="btn btn-primary w-100 mb-2"
         >

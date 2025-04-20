@@ -4,6 +4,7 @@ import ProfileBasicInfo from "./ProfileBasicInfo";
 import AllergenDisplay from "./AllergenDisplay";
 import PreferencesDisplay from "./PreferencesDisplay";
 import BioDisplay from "./BioDisplay";
+import { Link } from "react-router-dom";
 import { User } from "../../Types/Types";
 import { useSelector } from "react-redux";
 
@@ -19,6 +20,22 @@ export default function MyProfileViewer({ user }: { user: User }) {
           <ProfileBasicInfo user={user} />
         </Col>
         <Col md={8}>
+          <Row>
+            <div className="flex-row justify-content-around m-3">
+              <Link
+                className="btn btn-primary btn-lg m-3"
+                to={`/Profile/${user._id}/MyPosts`}
+              >
+                My Recipes
+              </Link>
+              <Link
+                className="btn btn-primary btn-lg m-3"
+                to={`/Profile/${user._id}/Favorites`}
+              >
+                My Saved
+              </Link>
+            </div>
+          </Row>
           <Row>
             <BioDisplay user={user} />
             <AllergenDisplay user={user} />

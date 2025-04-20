@@ -5,49 +5,60 @@ import AllergiesSelector from "./AllergiesSelector";
 import PreferencesSelector from "./PreferenceSelector";
 import ProfileEditorBottomBar from "./ProfileEditorBottomBar";
 import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUser } from "./reducer";
 import { useState } from "react";
-import { UserAllergies, UserPreferences } from "../../Types/Types";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { setCurrentUser } from "../reducer";
 
-export default function ProfileEditor({ userid }: { userid: string }) {
-  const { curUser } = useSelector((state: any) => state.userReducer);
-  const [bio, setBio] = useState<string>(curUser.bio);
-  const [username, setUsername] = useState<string>(curUser.username);
-  const [name, setName] = useState<string>(curUser.name);
-  const [allergies, setAllergies] = useState<UserAllergies[]>(
-    curUser.allergies
-  );
-  const [preferences, setPreferences] = useState<UserPreferences[]>(
-    curUser.preferences
-  );
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const updateUser = () => {
-    dispatch(
-      setCurrentUser({
-        _id: userid,
-        username: username,
-        name: name,
-        bio: bio,
-        allergies: allergies,
-        preferences: preferences,
-      })
-    );
-    navigate(`/Profile/${userid}/View`);
+export default function ProfileEditor({
+  userid,
+}: {
+  userid: string | undefined;
+}) {
+  const { users } = useSelector((state: any) => state.profilesReducer);
+  const curUser = users.find((u: any) => u._id === "123") ?? {
+    _id: "123",
+    name: "",
+    username: "",
+    bio: "",
+    allergies: [],
+    preferences: [],
   };
+
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState(curUser?.name || "");
+  const [username, setUsername] = useState(curUser?.username || "");
+  const [bio, setBio] = useState(curUser?.bio || "");
+  const [allergies, setAllergies] = useState(curUser?.allergies || "");
+  const [preferences, setPreferences] = useState(curUser?.preferences || "");
+
+  const handleSave = () => {
+    const updatedUser = {
+      ...curUser,
+      name,
+      username,
+      bio,
+      allergies,
+      preferences,
+    };
+
+    console.log("Saving changes... Dispatching user:", updatedUser); // Log the user being dispatched
+
+    dispatch(updateUser(updatedUser));
+  };
+
   return (
     <div id="recipe-profile-editor">
-      {userid !== curUser._id && <Navigate to={`/Profile/${userid}/View`} />}
+      {userid !== curUser?._id && (
+        <Navigate to={`/Profile/${curUser?._id}/Edit`} />
+      )}
       <Row id="recipe-profile-main">
         <Col md={4}>
           <ProfileBasicInfoEditor
-            username={username}
             name={name}
-            setUsername={setUsername}
             setName={setName}
+            username={username}
+            setUsername={setUsername}
           />
         </Col>
         <Col md={8}>
@@ -64,7 +75,7 @@ export default function ProfileEditor({ userid }: { userid: string }) {
           </Row>
         </Col>
       </Row>
-      <ProfileEditorBottomBar updateUser={updateUser} userid={userid} />
+      <ProfileEditorBottomBar user={curUser} onSave={handleSave} />
     </div>
   );
 }

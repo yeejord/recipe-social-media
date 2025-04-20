@@ -1,17 +1,18 @@
+import { useState } from "react";
 import { Card, Dropdown, Form } from "react-bootstrap";
 import PreferenceIconEdit from "./PreferenceIconEdit";
-import { UserAllergies, allAllergies } from "../../Types/Types";
-import { useState } from "react";
 
 export default function AllergiesSelector({
   allergies,
   setAllergies,
 }: {
-  allergies: UserAllergies[];
-  setAllergies: (allergies: UserAllergies[]) => void;
+  allergies: string[];
+  setAllergies: (newAllergies: string[]) => void;
 }) {
-  const notAllergies = allAllergies.filter((a) => allergies.indexOf(a) === -1);
-  const [searchVal, setSearchVal] = useState<string>("");
+  const [newAllergy, setNewAllergy] = useState<string>("");
+
+  const options = ["Tree Nuts", "Peanuts", "Wheat", "Dairy", "Shellfish"];
+
   return (
     <div id="recipe-allergies-selector" className="profile-card-holder">
       <Card>
@@ -22,37 +23,39 @@ export default function AllergiesSelector({
               <PreferenceIconEdit
                 iconType="allergen"
                 name={allergen}
-                removeSelf={() => {
-                  setAllergies(
-                    allergies.filter((a: UserAllergies) => a !== allergen)
-                  );
-                }}
+                removeSelf={() =>
+                  setAllergies(allergies.filter((a) => a !== allergen))
+                }
                 key={allergen}
               />
             ))}
           </Card.Text>
+
           <Dropdown>
             <Dropdown.Toggle className="selector-dropdown">
               <Form.Control
-                id="recipe-allergies"
-                placeholder="Allergies"
+                id="recipe-allergy-input"
+                placeholder="Add Allergy"
                 className="mb-2"
-                onChange={(e) => setSearchVal(e.target.value)}
+                value={newAllergy}
+                readOnly
               />
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              {notAllergies
-                .filter((a) =>
-                  a.toLowerCase().includes(searchVal.toLowerCase())
-                )
-                .map((a) => (
-                  <Dropdown.Item
-                    onClick={(e) => setAllergies([...allergies, a])}
-                  >
-                    {a}
-                  </Dropdown.Item>
-                ))}
+              {options.map((opt) => (
+                <Dropdown.Item
+                  key={opt}
+                  onClick={() => {
+                    setNewAllergy(opt);
+                    if (!allergies.includes(opt)) {
+                      setAllergies([...allergies, opt]);
+                    }
+                  }}
+                >
+                  {opt}
+                </Dropdown.Item>
+              ))}
             </Dropdown.Menu>
           </Dropdown>
         </Card.Body>

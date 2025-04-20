@@ -1,8 +1,15 @@
 import { FormControl, InputGroup } from "react-bootstrap";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Navigation() {
+  const { pathname } = useLocation();
+  const links = [
+    { label: "Feed", path: "/Feed"},
+    { label: "Profile", path: "/Profile/123"},
+    { label: "New Recipe", path: "/NewRecipe"},
+    { label: "Sign Out", path: "/Signin"},
+  ];
   return (
     <div
       id="rs-navigation"
@@ -10,40 +17,25 @@ export default function Navigation() {
                 d-flex flex-row w-100 top-0 start-0 bg-black"
       z-index={5}
     >
+      <div className="ms-2 text-white">
+        <h4>Recipz</h4>
+      </div>
       <InputGroup size="sm" className="ms-4 me-4 bg-white" id="wd-search-bar">
         <InputGroup.Text>
           <FaMagnifyingGlass />
         </InputGroup.Text>
         <FormControl placeholder="Search..." />
       </InputGroup>
-      <Link
-        to="/Feed"
+      {links.map((link) => (
+        <Link
+        to={link.path}
         id="rs-feed-link"
-        className="list-group-item text-center border-0 bg-black text-white"
-      >
-        Feed
+        className={`list-group-item text-center border-0 bg-black text-white
+          ${pathname.includes(link.path) ? "text-white bg-black text-decoration-underline" : "text-white bg-black"}`}>
+        {link.label} 
       </Link>
-      <Link
-        to="/Profile/123"
-        id="rs-profile-link"
-        className="list-group-item text-center border-0 bg-black text-white"
-      >
-        Profile
-      </Link>
-      <Link
-        to="/NewRecipe"
-        id="rs-new-recipe-link"
-        className="list-group-item text-center border-0 bg-black text-white"
-      >
-        New Recipe
-      </Link>
-      <Link
-        to="/Signin"
-        id="rs-sign-out-link"
-        className="list-group-item text-center border-0 bg-black text-white"
-      >
-        Sign Out
-      </Link>
+      ))}
+      
     </div>
   );
 }

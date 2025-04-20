@@ -1,9 +1,6 @@
 .blue-bg {
     background-color: #ADD8E6; /* Light blue */
   }
-
-  .recipe-image {
-  }
   
   /* Media query for large screens */
   @media (min-width: 992px) { /* Bootstrap large screen breakpoint */

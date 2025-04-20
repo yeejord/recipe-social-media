@@ -34,4 +34,6 @@ export interface User {
   preferences: UserPreferences[];
   following: string[];
   followers: string[];
+  myRecipes: string[];
+  savedRecipes: string[];
 }
