@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import FeedControls from "./FeedControls";
 import Recipes from "./Recipe/Recipes";
 import * as client from "./client";
-import * as userClient from "../Profile/client";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 export default function Feed({
@@ -18,13 +17,16 @@ export default function Feed({
     setSearch(searchVal);
   }
   const [filter, setFilter] = useState("feed");
-  const [recipes, setRecipes] = useState();
-  const [savedRecipes, setSavedRecipes] = useState();
-  const [allRecipes, setAllRecipes] = useState();
+  //const [recipes, setRecipes] = useState();
+  //const [savedRecipes, setSavedRecipes] = useState();
+  /*const [allRecipes, setAllRecipes] = useState();
   const { currentUser } = useSelector((state: any) => state.profilesReducer);
+  const dispatch = useDispatch();
 
   const fetchFeed = async (search: string) => {
-    setRecipes(await client.getFeed(currentUser._id, search));
+    //setRecipes(await client.getFeed(currentUser._id, search));
+    const recipes = await client.getFeed(currentUser._id, search);
+    dispatch
     setAllRecipes(await client.getAllRecipes(search));
     console.log("recipes = ");
     console.log(recipes);
@@ -33,8 +35,8 @@ export default function Feed({
   };
   useEffect(() => {
     fetchFeed(search);
-  }, [filter, search]);
-  const fetchSavedRecipes = async (search: string) => {
+  }, [filter, search]);*/
+  /*const fetchSavedRecipes = async (search: string) => {
     setSavedRecipes(await userClient.savedRecipesFor(currentUser._id, search));
     console.log("savedRecipes = ");
     console.log(savedRecipes);
@@ -45,18 +47,13 @@ export default function Feed({
 
   if (!recipes && !allRecipes) {
     return <p>No recipes loaded</p>;
-  }
+  }*/
 
   return (
     <div id="rs-feed">
       <h1>Feed</h1>
       <FeedControls filter={filter} setFilter={setFilter} />
-      <Recipes
-        filter={filter}
-        recipes={recipes ?? []}
-        allRecipes={allRecipes ?? []}
-        savedRecipes={savedRecipes ?? []}
-      />
+      <Recipes filter={filter} search={search} />
     </div>
   );
 }

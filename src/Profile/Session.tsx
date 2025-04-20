@@ -9,7 +9,10 @@ export default function Session({ children }: { children: any }) {
   const fetchProfile = async () => {
     try {
       const currentUser = await client.profile();
-      dispatch(setCurrentUser(currentUser));
+      const savedRecipes = (await client.savedRecipesFor(currentUser._id)).map(
+        (r: any) => r._id
+      );
+      dispatch(setCurrentUser({ ...currentUser, savedRecipes }));
     } catch (err: any) {
       console.error(err);
     }

@@ -29,7 +29,7 @@ export default function Signup() {
     };
     const user = await client.signup(inputtedUser);
     if (!user) return;
-    dispatch(setCurrentUser(user));
+    dispatch(setCurrentUser({ ...user, savedRecipes: [] }));
     navigate(`/Feed`);
   };
   return (
