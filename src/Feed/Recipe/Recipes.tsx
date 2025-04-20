@@ -1,6 +1,6 @@
 import { ListGroup } from "react-bootstrap";
 import { FaBookmark, FaRegBookmark, FaStar, FaTrash } from "react-icons/fa";
-import { deleteRecipe } from "../reducer";
+import { deleteRecipe, setAllRecipes } from "../reducer";
 import "./../feed.css";
 import { useDispatch, useSelector } from "react-redux";
 import { FaPencil } from "react-icons/fa6";
@@ -19,6 +19,7 @@ export default function Recipes({
   const [filteredRecipes, setFilteredRecipes] = useState<any[]>([]);
 
   useEffect(() => {
+    dispatch(setAllRecipes(allRecipes));
     switch (filter) {
       case "all":
         setFilteredRecipes(allRecipes);
