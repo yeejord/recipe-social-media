@@ -35,7 +35,14 @@ export default function App() {
                 <Route path="/Recipe/:recipeid/*" element={<RecipeViewer />} />
                 <Route path="/Feed" element={<Feed />} />
                 <Route path="/Feed/:search" element={<Feed />} />
-                <Route path="/NewRecipe" element={<NewRecipe />} />
+                <Route
+                  path="/NewRecipe"
+                  element={
+                    <ProtectedRoute>
+                      <NewRecipe />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route
                   path="/Feed/EditRecipe/:recipeid/*"
                   element={<EditRecipe />}
