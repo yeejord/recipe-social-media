@@ -5,11 +5,15 @@ import db from "../../Database";
 import { useState } from "react";
 import * as client from "../client";
 import { useSelector } from "react-redux";
+import { addRecipe } from "../reducer";
+import { useDispatch } from 'react-redux';
+import { addRecipeToUser } from "../../Profile/reducer";
 
 export default function NewRecipe() {
   const { currentUser } = useSelector((state: any) => state.userReducer);
   const { recipeid } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const recipe = db.recipes.find((r: any) => r._id === recipeid);
   const [name, setName] = useState(recipe?.name || "");
@@ -19,19 +23,40 @@ export default function NewRecipe() {
   const [steps, setSteps] = useState(recipe?.steps || "");
   const [link, setLink] = useState(recipe?.link || "");
 
-  const handleCreateRecipe = () => {
-    const newRecipe = {
-      _id: recipeid,
-      name,
-      description,
-      stars,
-      ingredients,
-      steps,
-      link,
-      owner: currentUser._id,
-    };
-    client.createRecipe(newRecipe);
-    navigate("/Feed");
+    const handleCreateRecipe = () => {
+      const newRecipe = {
+        _id: recipeid,
+        name,
+        description,
+        stars,
+        ingredients,
+        steps,
+        link,
+        owner: currentUser._id,
+      }
+        dispatch(addRecipe({
+            _id: recipeid,
+            owner: "123",
+            name,
+            description,
+            stars,
+            ingredients,
+            steps,
+            link,
+        }));
+        dispatch(addRecipeToUser({ 
+          userId: "123", 
+          recipe: { _id: recipeid,
+            owner: "123",
+            name,
+            description,
+            stars,
+            ingredients,
+            steps,
+            link, } }));
+        navigate("/Feed");
+      client.createRecipe(newRecipe);
+      navigate("/Feed");
   };
 
   return (
