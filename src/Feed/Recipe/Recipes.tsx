@@ -58,6 +58,10 @@ export default function Recipes({
     }
   };
 
+  const deleteRecipeButton = (recipe: any) => {
+    dispatch(deleteRecipe(recipe._id));
+  };
+
   return (
     <div id="rs-recipe-list">
       {filteredRecipes
@@ -92,7 +96,7 @@ export default function Recipes({
                     </Link>
                     <div className="btn">
                       <FaTrash
-                        onClick={() => dispatch(deleteRecipe(recipe._id))}
+                        onClick={() => deleteRecipeButton(recipe)}
                         style={{ cursor: "pointer", color: "red" }}
                         title="Delete Recipe"
                         size={18}
