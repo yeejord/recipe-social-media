@@ -1,11 +1,15 @@
 import { Button, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function ProfileEditorBottomBar({user, onSave,}: {
-  user: any; onSave: () => void;}) {
-
+export default function ProfileEditorBottomBar({
+  user,
+  onSave,
+}: {
+  user: any;
+  onSave: () => void;
+}) {
   const navigate = useNavigate();
-  
+
   return (
     <Row>
       <div
@@ -20,9 +24,9 @@ export default function ProfileEditorBottomBar({user, onSave,}: {
         </Link>
         <Button
           className="btn-warning btn-lg m-3"
-          onClick={() => {
+          onClick={async () => {
             console.log("Save Changes clicked");
-            onSave();
+            await onSave();
             navigate(`/Profile/${user._id}/View`);
           }}
         >

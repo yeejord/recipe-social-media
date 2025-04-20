@@ -1,6 +1,6 @@
 import { ListGroup } from "react-bootstrap";
 import { FaBookmark, FaRegBookmark, FaStar, FaTrash } from "react-icons/fa";
-import { deleteRecipe } from "../reducer";
+import { deleteRecipe, setAllRecipes, setFeedIds } from "../reducer";
 import "./../feed.css";
 import { useDispatch, useSelector } from "react-redux";
 import { FaPencil } from "react-icons/fa6";
@@ -45,23 +45,37 @@ export default function Recipes({ filter }: { filter: string }) {
     }
   );
 
-    const toggleSaveRecipe = (recipeId: string) => {
-      if (!currentUser) return;
-    
-      const saved = currentUser.savedRecipes || [];
-      const updatedSaved = saved.includes(recipeId)
-        ? saved.filter((id: string) => id !== recipeId)
-        : [...saved, recipeId];
-    
-      dispatch({
-        type: "users/updateUser",
-        payload: { ...currentUser, savedRecipes: updatedSaved },
-      });
-    };
+  const toggleSaveRecipe = (recipeId: string) => {
+    if (!currentUser) return;
 
-    return(
-        <div id="rs-recipe-list">
-          {filteredRecipes.slice().reverse().map((recipe: any) => (
+    const saved = currentUser.savedRecipes || [];
+    const wasSaved = saved.includes(recipeId);
+    const updatedSaved = wasSaved
+      ? saved.filter((id: string) => id !== recipeId)
+      : [...saved, recipeId];
+
+    dispatch({
+      type: "users/updateUser",
+      payload: { ...currentUser, savedRecipes: updatedSaved },
+    });
+    dispatch(setCurrentUser({ ...currentUser, savedRecipes: updatedSaved }));
+    if (wasSaved) {
+      userClient.unsaveRecipe(recipeId);
+    } else {
+      userClient.saveRecipe(recipeId);
+    }
+  };
+
+  const deleteRecipeButton = (recipe: any) => {
+    dispatch(deleteRecipe(recipe._id));
+  };
+
+  return (
+    <div id="rs-recipe-list">
+      {filteredRecipes
+        .slice()
+        .reverse()
+        .map((recipe: any) => (
           <ListGroup className="rounded-0" id="wd-modules">
             <ListGroup.Item className="rs-recipe p-0 mb-3 fs-5 rounded-3 blue-bg recipe-image">
               <div className="p-3 ps-2 text-start border-gray d-flex justify-content-between align-items-center">
@@ -144,6 +158,6 @@ export default function Recipes({ filter }: { filter: string }) {
             </ListGroup.Item>
           </ListGroup>
         ))}
-        </div>
-    );
+    </div>
+  );
 }

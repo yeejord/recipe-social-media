@@ -6,64 +6,70 @@ import PreferencesSelector from "./PreferenceSelector";
 import ProfileEditorBottomBar from "./ProfileEditorBottomBar";
 import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { updateUser } from "../reducer";
+import { setCurrentUser } from "../reducer";
 import { useState } from "react";
+import * as client from "./../client";
 
-export default function ProfileEditor({userid,}: {userid: string | undefined;}) {
-  const { users } = useSelector((state: any) => state.profilesReducer); 
-  const curUser = users.find((u: any) => u._id === "123") ?? {
-    _id: "123",
-    name: "",
-    username: "",
-    bio: "",
-    allergies: [],
-    preferences: [],
-  };   
+export default function ProfileEditor({
+  userid,
+}: {
+  userid: string | undefined;
+}) {
+  const { currentUser } = useSelector((state: any) => state.profilesReducer);
 
   const dispatch = useDispatch();
 
-  const [name, setName] = useState(curUser?.name || "");
-  const [username, setUsername] = useState(curUser?.username || "");
-  const [bio, setBio] = useState(curUser?.bio || "");
-  const [allergies, setAllergies] = useState(curUser?.allergies || "");
-  const [preferences, setPreferences] = useState(curUser?.preferences || "");
+  const [name, setName] = useState(currentUser?.name || "");
+  const [username, setUsername] = useState(currentUser?.username || "");
+  const [bio, setBio] = useState(currentUser?.bio || "");
+  const [allergies, setAllergies] = useState(currentUser?.allergies);
+  const [preferences, setPreferences] = useState(currentUser?.preferences);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const updatedUser = {
-      ...curUser,
+      ...currentUser,
       name,
       username,
       bio,
       allergies,
       preferences,
     };
-  
-    console.log("Saving changes... Dispatching user:", updatedUser);  // Log the user being dispatched
-  
-    dispatch(updateUser(updatedUser));
+    await client.updateUser(updatedUser);
+
+    console.log("Saving changes... Dispatching user:", updatedUser); // Log the user being dispatched
+
+    dispatch(setCurrentUser(updatedUser));
   };
 
   return (
     <div id="recipe-profile-editor">
-      {userid !== curUser?._id && (
-        <Navigate to={`/Profile/${curUser?._id}/Edit`} />
+      {userid !== currentUser?._id && (
+        <Navigate to={`/Profile/${currentUser?._id}/Edit`} />
       )}
       <Row id="recipe-profile-main">
         <Col md={4}>
-          <ProfileBasicInfoEditor name={name}
+          <ProfileBasicInfoEditor
+            name={name}
             setName={setName}
             username={username}
-            setUsername={setUsername} />
+            setUsername={setUsername}
+          />
         </Col>
         <Col md={8}>
           <Row>
             <BioEditor bio={bio} setBio={setBio} />
-            <AllergiesSelector allergies={allergies} setAllergies={setAllergies}/>
-            <PreferencesSelector preferences={preferences} setPreferences={setPreferences} />
-          </Row> 
+            <AllergiesSelector
+              allergies={allergies}
+              setAllergies={setAllergies}
+            />
+            <PreferencesSelector
+              preferences={preferences}
+              setPreferences={setPreferences}
+            />
+          </Row>
         </Col>
       </Row>
-      <ProfileEditorBottomBar user={curUser} onSave={handleSave}/>
+      <ProfileEditorBottomBar user={currentUser} onSave={handleSave} />
     </div>
   );
 }
