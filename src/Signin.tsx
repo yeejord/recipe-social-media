@@ -14,7 +14,8 @@ export default function Signin() {
     const user = await client.signin({ username, password });
     if (!user) return;
     dispatch(setCurrentUser(user));
-    navigate(`/Profile/${user._id}`);
+    console.log("dispatch(setCurrentUser signin");
+    navigate(`/Feed`);
   };
   return (
     <div id="recipe-signin-screen">
@@ -36,7 +37,6 @@ export default function Signin() {
         />
         <Button
           id="recipe-signin-btn"
-          to="/Feed"
           onClick={signin}
           className="btn btn-primary w-100 mb-2"
         >

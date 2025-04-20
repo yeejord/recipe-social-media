@@ -16,10 +16,8 @@ export default function Signup() {
     if (password !== confirmPassword) return;
     const user = await client.signup({ username, password, bio });
     if (!user) return;
-    console.log("signed up user = ");
-    console.log(user);
     dispatch(setCurrentUser(user));
-    navigate(`/Profile/${user._id}`);
+    navigate(`/Feed`);
   };
   return (
     <div>

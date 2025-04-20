@@ -1,15 +1,25 @@
 import { FaStar } from "react-icons/fa";
-import { recipes } from "../Database";
 import { useParams } from "react-router";
 import "./RecipeViewer.css";
 import { Card } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import * as client from "./client";
 
 export default function RecipeViewer() {
   const { recipeid } = useParams();
-  const recipe = recipes.find((r) => r._id === recipeid);
-  if (recipe === undefined) {
-    throw "Could not find recipe";
+  const [recipe, setRecipe] = useState<any>(undefined);
+  if (!recipe) {
+    return <p>Could not load recipe</p>;
   }
+  const fetchRecipe = async (recipeid: string) => {
+    setRecipe(await client.findRecipeById(recipeid));
+  };
+  useEffect(() => {
+    if (!recipeid) {
+      return;
+    }
+    fetchRecipe(recipeid);
+  }, [recipeid]);
   const description: string = recipe.description;
   const ingredients: string = (recipe as any).ingredients ?? "";
   const steps: string = (recipe as any).steps ?? "";

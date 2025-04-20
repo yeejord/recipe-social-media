@@ -1,9 +1,17 @@
 import { Button, Nav } from "react-bootstrap";
-import { User } from "../Types/Types";
 import { useSelector } from "react-redux";
+import { User } from "../Types/Types";
 
-export default function ProfileNavigation({ user }: { user: User }) {
-  const { curUser } = useSelector((state: any) => state.userReducer);
+export default function ProfileNavigation({
+  user,
+  filter,
+  setFilter,
+}: {
+  user: User;
+  filter: any;
+  setFilter: any;
+}) {
+  const { currentUser } = useSelector((state: any) => state.userReducer);
   return (
     <Nav>
       <Nav.Item className="me-2">
@@ -13,9 +21,8 @@ export default function ProfileNavigation({ user }: { user: User }) {
           href={`#/Profile/${user._id}/View`}
           className="w-100"
           onClick={() => setFilter("view")}
-          id="View"
         >
-          {!!curUser && curUser._id === user._id ? "Me" : user.name}
+          {currentUser._id === user._id ? "Me" : user.name}
         </Button>
       </Nav.Item>
       <Nav.Item className="me-2">
