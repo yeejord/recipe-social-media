@@ -19,7 +19,7 @@ import { setUsers } from "./reducer";
 
 export default function Profile() {
   const [filter, setFilter] = useState("view");
-  const [allUsers, setAllUsers] = useState<User[]>();
+  const [allUsers, setAllUsers] = useState<User[]>([]);
   const { currentUser } = useSelector((state: any) => state.profilesReducer);
   // If there is no user id navigate to the current user
   const [user, setUser] = useState<User>();

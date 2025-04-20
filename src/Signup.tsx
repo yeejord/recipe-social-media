@@ -4,7 +4,7 @@ import { setCurrentUser } from "./Profile/reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import * as client from "./Profile/client";
-import { DatabaseUser } from "./Types/Types";
+import { DatabaseUser, UserRole } from "./Types/Types";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ export default function Signup() {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [bio, setBio] = useState<string>("");
+  const [role, setRole] = useState<UserRole>("User");
   const signup = async () => {
     if (password !== confirmPassword) return;
     const inputtedUser: DatabaseUser = {
@@ -22,7 +23,7 @@ export default function Signup() {
       bio,
       _id: "",
       name,
-      role: "User",
+      role: role,
       allergies: [],
       preferences: [],
       savedRecipes: [],
@@ -75,6 +76,13 @@ export default function Signup() {
           value={bio}
           onChange={(e) => setBio(e.target.value)}
         />
+        <Form.Select
+          defaultValue={"User"}
+          onChange={(e) => setRole(e.target.value as UserRole)}
+        >
+          <option value="User">User</option>
+          <option value="Admin">Admin</option>
+        </Form.Select>
         <Button
           id="recipe-signin-btn"
           onClick={signup}

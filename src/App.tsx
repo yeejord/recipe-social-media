@@ -35,7 +35,14 @@ export default function App() {
                 <Route path="/Recipe/:recipeid/*" element={<RecipeViewer />} />
                 <Route path="/Feed" element={<Feed />} />
                 <Route path="/Feed/:search" element={<Feed />} />
-                <Route path="/NewRecipe" element={<NewRecipe />} />
+                <Route
+                  path="/NewRecipe"
+                  element={
+                    <ProtectedRoute userOnly={true}>
+                      <NewRecipe />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route
                   path="/Feed/EditRecipe/:recipeid/*"
                   element={<EditRecipe />}
@@ -47,7 +54,7 @@ export default function App() {
                 <Route
                   path="/Profile"
                   element={
-                    <ProtectedRoute>
+                    <ProtectedRoute userOnly={false}>
                       <Profile />
                     </ProtectedRoute>
                   }
