@@ -37,7 +37,7 @@ export default function NewRecipe() {
     dispatch(
       addRecipe({
         _id: recipeid,
-        owner: "123",
+        owner: currentUser._id,
         name,
         description,
         stars,
@@ -48,10 +48,10 @@ export default function NewRecipe() {
     );
     dispatch(
       addRecipeToUser({
-        userId: "123",
+        userId: currentUser._id,
         recipe: {
           _id: recipeid,
-          owner: "123",
+          owner: currentUser._id,
           name,
           description,
           stars,
@@ -61,7 +61,6 @@ export default function NewRecipe() {
         },
       })
     );
-    navigate("/Feed");
     client.createRecipe(newRecipe);
     navigate("/Feed");
   };
