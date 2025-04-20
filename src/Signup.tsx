@@ -4,17 +4,33 @@ import { setCurrentUser } from "./Profile/reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import * as client from "./Profile/client";
+import { DatabaseUser } from "./Types/Types";
 
 export default function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [name, setName] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [bio, setBio] = useState<string>("");
   const signup = async () => {
     if (password !== confirmPassword) return;
-    const user = await client.signup({ username, password, bio });
+    const inputtedUser: DatabaseUser = {
+      username,
+      password,
+      bio,
+      _id: "",
+      name,
+      role: "User",
+      allergies: [],
+      preferences: [],
+      following: [],
+      followers: [],
+      myRecipes: [],
+      savedRecipes: [],
+    };
+    const user = await client.signup(inputtedUser);
     if (!user) return;
     dispatch(setCurrentUser(user));
     navigate(`/Feed`);
@@ -24,7 +40,13 @@ export default function Signup() {
       <h1>New here?</h1>
       <div id="recipe-signup">
         <h3>Sign up</h3>
-        <Form.Control id="recipe-name" placeholder="Name" className="mb-2" />
+        <Form.Control
+          id="recipe-name"
+          placeholder="Name"
+          className="mb-2"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
         <Form.Control
           id="recipe-username"
           placeholder="Username"

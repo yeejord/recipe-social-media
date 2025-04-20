@@ -37,3 +37,7 @@ export interface User {
   myRecipes: string[];
   savedRecipes: string[];
 }
+
+export interface DatabaseUser extends User {
+  password: string;
+}
