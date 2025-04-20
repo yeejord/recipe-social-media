@@ -14,7 +14,6 @@ export default function Signin() {
     const user = await client.signin({ username, password });
     if (!user) return;
     dispatch(setCurrentUser(user));
-    console.log("dispatch(setCurrentUser signin");
     navigate(`/Feed`);
   };
   return (

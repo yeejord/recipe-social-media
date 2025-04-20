@@ -24,9 +24,9 @@ export default function ProfileEditorBottomBar({
         </Link>
         <Button
           className="btn-warning btn-lg m-3"
-          onClick={() => {
+          onClick={async () => {
             console.log("Save Changes clicked");
-            onSave();
+            await onSave();
             navigate(`/Profile/${user._id}/View`);
           }}
         >
