@@ -4,8 +4,19 @@ import Recipes from "./Recipe/Recipes";
 import * as client from "./client";
 import * as userClient from "../Profile/client";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-export default function Feed({ search }: { search: string }) {
+export default function Feed({
+  search,
+  setSearch,
+}: {
+  search: string;
+  setSearch: (newSearch: string) => void;
+}) {
+  const { searchVal } = useParams();
+  if (!!searchVal) {
+    setSearch(searchVal);
+  }
   const [filter, setFilter] = useState("feed");
   const [recipes, setRecipes] = useState();
   const [savedRecipes, setSavedRecipes] = useState();
@@ -15,6 +26,10 @@ export default function Feed({ search }: { search: string }) {
   const fetchFeed = async (search: string) => {
     setRecipes(await client.getFeed(currentUser._id, search));
     setAllRecipes(await client.getAllRecipes(search));
+    console.log("recipes = ");
+    console.log(recipes);
+    console.log("allRecipes = ");
+    console.log(allRecipes);
   };
   useEffect(() => {
     fetchFeed(search);

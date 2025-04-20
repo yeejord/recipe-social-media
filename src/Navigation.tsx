@@ -1,8 +1,14 @@
-import { FormControl, InputGroup } from "react-bootstrap";
+import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { Link, useLocation } from "react-router-dom";
 
-export default function Navigation() {
+export default function Navigation({
+  search,
+  setSearch,
+}: {
+  search: string;
+  setSearch: (searchVal: string) => void;
+}) {
   const { pathname } = useLocation();
   const links = [
     { label: "Feed", path: "/Feed" },
@@ -24,7 +30,14 @@ export default function Navigation() {
         <InputGroup.Text>
           <FaMagnifyingGlass />
         </InputGroup.Text>
-        <FormControl placeholder="Search..." />
+        <FormControl
+          placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <Link className="btn btn-primary" to={`Feed/?search=${search}`}>
+          Search!
+        </Link>
       </InputGroup>
       {links.map((link) => (
         <Link

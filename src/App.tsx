@@ -14,14 +14,16 @@ import RecipeDetails from "./Feed/Recipe/RecipeDetails";
 import RecipeViewer from "./RecipeViewer";
 import ProtectedRoute from "./ProtectedRoute";
 import Session from "./Profile/Session";
+import { useState } from "react";
 
 export default function App() {
+  const [search, setSearch] = useState<string>("");
   return (
     <HashRouter>
       <div id="rs-App">
         <Provider store={store}>
           <div className="mb-4">
-            <Navigation z-index={5} />
+            <Navigation z-index={5} search={search} setSearch={setSearch} />
           </div>
           <div className="rs-main-content-offset p-5">
             <Session>
@@ -40,7 +42,10 @@ export default function App() {
                 <Route path="/Signup" element={<Signup />} />
                 <Route path="/RecipeList" element={<RecipeList />} />
                 <Route path="/Recipe/:recipeid/*" element={<RecipeViewer />} />
-                <Route path="/Feed" element={<Feed search={""} />} />
+                <Route
+                  path="/Feed"
+                  element={<Feed search={""} setSearch={setSearch} />}
+                />
                 <Route path="/NewRecipe" element={<NewRecipe />} />
                 <Route
                   path="/Feed/EditRecipe/:recipeid/*"

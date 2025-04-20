@@ -11,10 +11,11 @@ import UserList from "../UserList";
 import ProfileNavigation from "./ProfileNavigation";
 import ProfileMyRecipes from "./MyProfileViewer/ProfileMyRecipes";
 import ProfileMySaved from "./MyProfileViewer/ProfileMySaved";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as client from "./client";
 import { useEffect, useState } from "react";
 import { User } from "../Types/Types";
+import { setUsers } from "./reducer";
 
 export default function Profile() {
   const [filter, setFilter] = useState("view");
@@ -26,6 +27,7 @@ export default function Profile() {
   const [followings, setFollowings] = useState<User[]>([]);
   const { userid } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   // Fetches the user with the given user id (or the current user's id)
   const fetchUsers = async (id: string | undefined) => {
     setAllUsers(await client.findAllUsers());
@@ -36,6 +38,7 @@ export default function Profile() {
     // Fetch user if the user id is defined. Otherwise use
     // the curUser
     setUser(await client.findUserById(id));
+    dispatch(setUsers(allUsers));
     setFollowers(await client.followers(id));
     setFollowings(await client.following(id));
   };
