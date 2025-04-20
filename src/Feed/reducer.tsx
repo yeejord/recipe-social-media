@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: { recipes: any[] } = {
+const initialState: { recipes: any[]; feedIds: any[] } = {
   recipes: [],
+  feedIds: [],
 };
 
 const recipeSlice = createSlice({
@@ -27,6 +28,9 @@ const recipeSlice = createSlice({
     setAllRecipes: (state, { payload: allRecipes }) => {
       state.recipes = allRecipes;
     },
+    setFeedIds: (state, { payload: newFeedIds }) => {
+      state.feedIds = newFeedIds;
+    },
   },
 });
 
@@ -36,5 +40,6 @@ export const {
   updateRecipe,
   addRecipe,
   setAllRecipes,
+  setFeedIds,
 } = recipeSlice.actions;
 export default recipeSlice.reducer;
