@@ -12,15 +12,17 @@ import { useEffect, useState } from "react";
 
 export default function MyProfileViewer({ user }: { user: User }) {
   const { currentUser } = useSelector((state: any) => state.profilesReducer);
-  const [followingUser, setFollowingUser] = useState<boolean | "LOADING">(
-    "LOADING"
-  );
+  const [followingUser, setFollowingUser] = useState<
+    boolean | "LOADING" | "NONE"
+  >(!!currentUser ? "LOADING" : "NONE");
   const fetchFollowingUser = async () => {
     setFollowingUser(await client.amFollowing(user._id));
   };
-  useEffect(() => {
-    fetchFollowingUser();
-  }, []);
+  if (!!currentUser) {
+    useEffect(() => {
+      fetchFollowingUser();
+    }, []);
+  }
   if (followingUser === "LOADING") {
     return <p>Loading</p>;
   }
@@ -40,14 +42,14 @@ export default function MyProfileViewer({ user }: { user: User }) {
       <Row id="recipe-profile-main">
         <Col md={4}>
           <ProfileBasicInfo user={user} />
-          {!!currentUser &&
+          {(!!currentUser &&
             currentUser._id !== user._id &&
             ((followingUser && (
               <Button onClick={clickUnfollow}>UnFollow</Button>
             )) ||
               (!followingUser && (
                 <Button onClick={clickFollow}>Follow</Button>
-              )))}
+              )))) || <Button disabled>Follow</Button>}
         </Col>
         <Col md={8}>
           <Row>

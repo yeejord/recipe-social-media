@@ -39,8 +39,13 @@ export default function Profile() {
     // the curUser
     setUser(await client.findUserById(id));
     dispatch(setUsers(allUsers));
-    setFollowers(await client.followers(id));
-    setFollowings(await client.following(id));
+    if (!!currentUser) {
+      setFollowers(await client.followers(id));
+      setFollowings(await client.following(id));
+    } else {
+      setFollowers([]);
+      setFollowings([]);
+    }
   };
   useEffect(() => {
     fetchUsers(userid);
