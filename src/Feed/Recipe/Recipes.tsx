@@ -5,44 +5,44 @@ import "./../feed.css";
 import { useDispatch, useSelector } from "react-redux";
 import { FaPencil } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import SaveRecipeButton from "./SaveRecipeButton";
+import * as client from "../client";
+import { useEffect } from "react";
+import { setCurrentUser } from "../../Profile/reducer";
+import * as userClient from "../../Profile/client";
 
 export default function Recipes({
-  recipes,
   filter,
-  allRecipes,
-  savedRecipes,
-}: any) {
+  search,
+}: {
+  filter: string;
+  search: string;
+}) {
+  const { recipes } = useSelector((state: any) => state.recipesReducer);
   const { currentUser } = useSelector((state: any) => state.profilesReducer);
   const dispatch = useDispatch();
-  const [filteredRecipes, setFilteredRecipes] = useState<any[]>([]);
 
+  const fetchFeed = async (search: string) => {
+    const recipes = await client.getFeed(currentUser._id, search);
+    dispatch(setAllRecipes(recipes));
+  };
   useEffect(() => {
-    dispatch(setAllRecipes(allRecipes));
-    switch (filter) {
-      case "all":
-        setFilteredRecipes(allRecipes);
-        break;
-      case "feed":
-        setFilteredRecipes(recipes);
-        break;
-      case "mine":
-        setFilteredRecipes(
-          allRecipes.filter((recipe: any) => recipe.owner === currentUser._id)
-        );
-        break;
-      case "saved":
-        setFilteredRecipes(savedRecipes);
-        break;
-    }
-  }, [filter, recipes, allRecipes, savedRecipes]);
+    fetchFeed(search);
+  }, [filter, search]);
+
+  const filteredRecipes = recipes.filter((recipe: any) => {
+    if (filter === "feed") return true;
+    if (filter === "mine") return recipe.owner === currentUser._id;
+    if (filter === "saved")
+      return currentUser?.savedRecipes?.includes(recipe._id);
+    return true;
+  });
 
   const toggleSaveRecipe = (recipeId: string) => {
     if (!currentUser) return;
 
     const saved = currentUser.savedRecipes || [];
-    const updatedSaved = saved.includes(recipeId)
+    const wasSaved = saved.includes(recipeId);
+    const updatedSaved = wasSaved
       ? saved.filter((id: string) => id !== recipeId)
       : [...saved, recipeId];
 
@@ -50,6 +50,12 @@ export default function Recipes({
       type: "users/updateUser",
       payload: { ...currentUser, savedRecipes: updatedSaved },
     });
+    dispatch(setCurrentUser({ ...currentUser, savedRecipes: updatedSaved }));
+    if (wasSaved) {
+      userClient.unsaveRecipe(recipeId);
+    } else {
+      userClient.saveRecipe(recipeId);
+    }
   };
 
   return (
@@ -84,11 +90,6 @@ export default function Recipes({
                     >
                       See More Details
                     </Link>
-                    <SaveRecipeButton
-                      recipeId={recipe._id}
-                      savedRecipes={savedRecipes}
-                      key={recipe._id}
-                    />
                     <div className="btn">
                       <FaTrash
                         onClick={() => dispatch(deleteRecipe(recipe._id))}
@@ -107,52 +108,29 @@ export default function Recipes({
                         size={18}
                       />
                     </Link>
+                    <button
+                      className="btn border-0"
+                      onClick={() => toggleSaveRecipe(recipe._id)}
+                      title={
+                        currentUser?.savedRecipes?.includes(recipe._id)
+                          ? "Unsave Recipe"
+                          : "Save Recipe"
+                      }
+                    >
+                      {currentUser?.savedRecipes?.includes(recipe._id) ? (
+                        <FaBookmark size={18} style={{ color: "dodgerblue" }} />
+                      ) : (
+                        <FaRegBookmark size={18} style={{ color: "gray" }} />
+                      )}
+                    </button>
                   </div>
                 </div>
-              </div>
-              <div className="fs-6 pb-3 ps-2 text-start">
-                {recipe.description}
-              </div>
-              <div className="text-start ps-2">
-                <Link
-                  to={`/Feed/RecipeDetails/${recipe._id}`}
-                  className="btn bg-secondary border-0 me-2"
-                >
-                  See More Details
-                </Link>
-                <div className="btn">
-                  <FaTrash
-                    onClick={() => dispatch(deleteRecipe(recipe._id))}
-                    style={{ cursor: "pointer", color: "red" }}
-                    title="Delete Recipe"
-                    size={18}
-                  />
-                </div>
-                <Link
-                  to={`/Feed/EditRecipe/${recipe._id}`}
-                  className="btn border-0"
-                >
-                  <FaPencil
-                    style={{ cursor: "pointer", color: "blue" }}
-                    title="Edit Recipe"
-                    size={18}
-                  />
-                </Link>
-                <button
-                  className="btn border-0"
-                  onClick={() => toggleSaveRecipe(recipe._id)}
-                  title={
-                    currentUser?.savedRecipes?.includes(recipe._id)
-                      ? "Unsave Recipe"
-                      : "Save Recipe"
-                  }
-                >
-                  {currentUser?.savedRecipes?.includes(recipe._id) ? (
-                    <FaBookmark size={18} style={{ color: "dodgerblue" }} />
-                  ) : (
-                    <FaRegBookmark size={18} style={{ color: "gray" }} />
-                  )}
-                </button>
+                <img
+                  src="/images/baked-ziti.jpg"
+                  alt="Recipe"
+                  className="ms-3"
+                  style={{ width: "100px", height: "auto", objectFit: "cover" }}
+                />
               </div>
             </ListGroup.Item>
           </ListGroup>

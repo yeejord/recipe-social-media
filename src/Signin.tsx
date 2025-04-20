@@ -1,6 +1,5 @@
 import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import db from "./Database";
 import { setCurrentUser } from "./Profile/reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -14,7 +13,9 @@ export default function Signin() {
   const signin = async () => {
     const user = await client.signin({ username, password });
     if (!user) return;
-    dispatch(setCurrentUser(user));
+    const savedRecipes = await client.savedRecipesFor(user._id);
+    const savedRecipeIds = savedRecipes.map((r: any) => r._id);
+    dispatch(setCurrentUser({ ...user, savedRecipes: savedRecipeIds }));
     navigate(`/Feed`);
   };
   return (
@@ -40,8 +41,7 @@ export default function Signin() {
           onClick={signin}
           className="btn btn-primary w-100 mb-2"
         >
-          Sign in
-          navigate('/Feed');
+          Sign in navigate('/Feed');
         </Button>
         <Link id="recipe-signup-link" to="/Signup">
           Sign up
