@@ -2,11 +2,12 @@ import { Card, Col, Container, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { User } from "../Types/Types";
 import { deleteUser } from "../Profile/reducer";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaUserMinus, FaUserPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function UserCard({ user }: { user: User }) {
   const { users } = useSelector((state: any) => state.profilesReducer); 
+  const { currentUser } = useSelector((state: any) => state.profilesReducer);
   const curUser = users.find((u: any) => u._id === user._id) ?? {
     _id: "123",
     name: "",

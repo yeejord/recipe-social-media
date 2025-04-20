@@ -8,6 +8,7 @@ export default function RecipeDetails() {
   const { recipeid } = useParams();
   const navigate = useNavigate();
   const { recipes } = useSelector((state: any) => state.recipesReducer);
+  const { currentUser } = useSelector((state: any) => state.profilesReducer);
   const recipe = recipes.find((r: any) => r._id === recipeid);
 
   return (
@@ -34,16 +35,18 @@ export default function RecipeDetails() {
                 />
               ))}
             </div>
-            <Link
-              to={`/Feed/EditRecipe/${recipe?._id}`}
-              className="btn border-0"
-            >
-              <FaPencil
-                style={{ cursor: "pointer", color: "blue" }}
-                title="Edit Recipe"
-                size={18}
-              />
-            </Link>
+            {(currentUser && (currentUser._id === recipe.owner || currentUser.role === "Admin")) && (
+              <Link
+                to={`/Feed/EditRecipe/${recipe?._id}`}
+                className="btn border-0"
+              >
+                <FaPencil
+                  style={{ cursor: "pointer", color: "blue" }}
+                  title="Edit Recipe"
+                  size={18}
+                />
+              </Link>
+            )}
           </div>
 
           <div className="mb-4">

@@ -94,24 +94,29 @@ export default function Recipes({
                     >
                       See More Details
                     </Link>
-                    <div className="btn">
-                      <FaTrash
-                        onClick={() => deleteRecipeButton(recipe)}
-                        style={{ cursor: "pointer", color: "red" }}
-                        title="Delete Recipe"
-                        size={18}
-                      />
-                    </div>
-                    <Link
-                      to={`/Feed/EditRecipe/${recipe._id}`}
-                      className="btn border-0"
-                    >
-                      <FaPencil
-                        style={{ cursor: "pointer", color: "blue" }}
-                        title="Edit Recipe"
-                        size={18}
-                      />
-                    </Link>
+                    {(currentUser && (currentUser._id === recipe.owner || currentUser.role === "Admin")) && (
+                    <>
+                      <div className="btn">
+                        <FaTrash
+                          onClick={() => deleteRecipeButton(recipe)}
+                          style={{ cursor: "pointer", color: "red" }}
+                          title="Delete Recipe"
+                          size={18}
+                        />
+                      </div>
+                      <Link
+                        to={`/Feed/EditRecipe/${recipe._id}`}
+                        className="btn border-0"
+                      >
+                        <FaPencil
+                          style={{ cursor: "pointer", color: "blue" }}
+                          title="Edit Recipe"
+                          size={18}
+                        />
+                      </Link>
+                    </>
+                    )}
+                    {(currentUser && (
                     <button
                       className="btn border-0"
                       onClick={() => toggleSaveRecipe(recipe._id)}
@@ -126,7 +131,7 @@ export default function Recipes({
                       ) : (
                         <FaRegBookmark size={18} style={{ color: "gray" }} />
                       )}
-                    </button>
+                    </button>))}
                   </div>
                 </div>
                 <img
