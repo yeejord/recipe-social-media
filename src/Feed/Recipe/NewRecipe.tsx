@@ -6,11 +6,11 @@ import { useState } from "react";
 import * as client from "../client";
 import { useSelector } from "react-redux";
 import { addRecipe } from "../reducer";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { addRecipeToUser } from "../../Profile/reducer";
 
 export default function NewRecipe() {
-  const { currentUser } = useSelector((state: any) => state.userReducer);
+  const { currentUser } = useSelector((state: any) => state.profilesReducer);
   const { recipeid } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,40 +23,47 @@ export default function NewRecipe() {
   const [steps, setSteps] = useState(recipe?.steps || "");
   const [link, setLink] = useState(recipe?.link || "");
 
-    const handleCreateRecipe = () => {
-      const newRecipe = {
+  const handleCreateRecipe = () => {
+    const newRecipe = {
+      _id: recipeid,
+      name,
+      description,
+      stars,
+      ingredients,
+      steps,
+      link,
+      owner: currentUser._id,
+    };
+    dispatch(
+      addRecipe({
         _id: recipeid,
+        owner: "123",
         name,
         description,
         stars,
         ingredients,
         steps,
         link,
-        owner: currentUser._id,
-      }
-        dispatch(addRecipe({
-            _id: recipeid,
-            owner: "123",
-            name,
-            description,
-            stars,
-            ingredients,
-            steps,
-            link,
-        }));
-        dispatch(addRecipeToUser({ 
-          userId: "123", 
-          recipe: { _id: recipeid,
-            owner: "123",
-            name,
-            description,
-            stars,
-            ingredients,
-            steps,
-            link, } }));
-        navigate("/Feed");
-      client.createRecipe(newRecipe);
-      navigate("/Feed");
+      })
+    );
+    dispatch(
+      addRecipeToUser({
+        userId: "123",
+        recipe: {
+          _id: recipeid,
+          owner: "123",
+          name,
+          description,
+          stars,
+          ingredients,
+          steps,
+          link,
+        },
+      })
+    );
+    navigate("/Feed");
+    client.createRecipe(newRecipe);
+    navigate("/Feed");
   };
 
   return (

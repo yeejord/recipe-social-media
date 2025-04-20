@@ -15,7 +15,7 @@ export default function ProfileEditor({
 }: {
   userid: string | undefined;
 }) {
-  const { currentUser } = useSelector((state: any) => state.userReducer);
+  const { currentUser } = useSelector((state: any) => state.profilesReducer);
 
   const dispatch = useDispatch();
 

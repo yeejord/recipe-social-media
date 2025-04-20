@@ -19,7 +19,7 @@ import { User } from "../Types/Types";
 export default function Profile() {
   const [filter, setFilter] = useState("view");
   const [allUsers, setAllUsers] = useState<User[]>();
-  const { currentUser } = useSelector((state: any) => state.userReducer);
+  const { currentUser } = useSelector((state: any) => state.profilesReducer);
   // If there is no user id navigate to the current user
   const [user, setUser] = useState<User>();
   const [followers, setFollowers] = useState<User[]>([]);

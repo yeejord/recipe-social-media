@@ -11,7 +11,7 @@ import * as client from "../client";
 import { useEffect, useState } from "react";
 
 export default function MyProfileViewer({ user }: { user: User }) {
-  const { currentUser } = useSelector((state: any) => state.userReducer);
+  const { currentUser } = useSelector((state: any) => state.profilesReducer);
   const [followingUser, setFollowingUser] = useState<boolean | "LOADING">(
     "LOADING"
   );
