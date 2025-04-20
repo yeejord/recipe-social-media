@@ -10,7 +10,7 @@ export default function Feed({ search }: { search: string }) {
   const [recipes, setRecipes] = useState();
   const [savedRecipes, setSavedRecipes] = useState();
   const [allRecipes, setAllRecipes] = useState();
-  const { currentUser } = useSelector((state: any) => state.userReducer);
+  const { currentUser } = useSelector((state: any) => state.profilesReducer);
 
   const fetchFeed = async (search: string) => {
     setRecipes(await client.getFeed(currentUser._id, search));
