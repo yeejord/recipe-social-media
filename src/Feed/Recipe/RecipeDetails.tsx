@@ -8,8 +8,10 @@ export default function RecipeDetails() {
   const { recipeid } = useParams();
   const navigate = useNavigate();
   const { recipes } = useSelector((state: any) => state.recipesReducer);
+  const { users } = useSelector((state: any) => state.profilesReducer);
   const { currentUser } = useSelector((state: any) => state.profilesReducer);
   const recipe = recipes.find((r: any) => r._id === recipeid);
+  const recipeOwner = users.find((u:any) => u._id === recipe.owner);
 
   return (
     <div id="rs-new-recipe">
@@ -48,7 +50,12 @@ export default function RecipeDetails() {
               </Link>
             )}
           </div>
-
+          <div className="text-muted mb-0">
+            uploaded by{" "}
+            <Link to={`/Profile/${recipe.owner}`}>
+              {recipe.owner ?? "Unknown User"}
+            </Link>
+          </div>
           <div className="mb-4">
             <h4>{recipe?.description}</h4>
           </div>
