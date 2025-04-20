@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { FormControl, InputGroup } from "react-bootstrap";
+import { Button, FormControl, InputGroup } from "react-bootstrap";
 import { FaMagnifyingGlass } from "react-icons/fa6";
-import { useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import * as userClient from "./Profile/client";
+import { setCurrentUser } from "./Profile/reducer";
 
 export default function Navigation() {
   const [searchVal, setSearchVal] = useState<string>("");
@@ -13,8 +15,9 @@ export default function Navigation() {
     { label: "Feed", path: "/Feed" },
     { label: "Profile", path: "/Profile" },
     { label: "New Recipe", path: "/NewRecipe" },
-    { label: currentUser ? "Sign Out" : "Sign In", path: "/Signin" },
   ];
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <div
@@ -53,6 +56,16 @@ export default function Navigation() {
           {link.label}
         </Link>
       ))}
+      <Button
+        variant={currentUser ? "danger" : "primary"}
+        onClick={async () => {
+          await userClient.signout();
+          dispatch(setCurrentUser(null));
+          navigate(`/Signin`);
+        }}
+      >
+        {currentUser ? "Sign Out" : "Sign In"}
+      </Button>
     </div>
   );
 }
