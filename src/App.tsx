@@ -44,7 +44,7 @@ export default function App() {
                 <Route path="/Recipe/:recipeid/*" element={<RecipeViewer />} />
                 <Route
                   path="/Feed"
-                  element={<Feed search={search} setSearch={setSearch} />}
+                  element={<Feed search={""} setSearch={setSearch} />}
                 />
                 <Route path="/NewRecipe" element={<NewRecipe />} />
                 <Route

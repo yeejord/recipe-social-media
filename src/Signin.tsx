@@ -1,5 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import db from "./Database";
 import { setCurrentUser } from "./Profile/reducer";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -40,6 +41,7 @@ export default function Signin() {
           className="btn btn-primary w-100 mb-2"
         >
           Sign in
+          navigate('/Feed');
         </Button>
         <Link id="recipe-signup-link" to="/Signup">
           Sign up
