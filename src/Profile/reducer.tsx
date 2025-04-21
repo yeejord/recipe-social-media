@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import db from "../Database";
 
 const initialState = {
-  users: db.users,
+  users: [],
   currentUser: null,
 };
 

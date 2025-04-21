@@ -31,6 +31,7 @@ export default function Profile() {
   // Fetches the user with the given user id (or the current user's id)
   const fetchUsers = async (id: string | undefined) => {
     setAllUsers(await client.findAllUsers());
+    console.log("Found all users");
     if (!id) {
       navigate(`/profile/${currentUser._id}/View`);
       return;
