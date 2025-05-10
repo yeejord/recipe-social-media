@@ -19,7 +19,7 @@ import { setUsers } from "./reducer";
 
 export default function Profile() {
   const [filter, setFilter] = useState("view");
-  const [allUsers, setAllUsers] = useState<User[]>();
+  const [allUsers, setAllUsers] = useState<User[]>([]);
   const { currentUser } = useSelector((state: any) => state.profilesReducer);
   // If there is no user id navigate to the current user
   const [user, setUser] = useState<User>();
@@ -31,6 +31,7 @@ export default function Profile() {
   // Fetches the user with the given user id (or the current user's id)
   const fetchUsers = async (id: string | undefined) => {
     setAllUsers(await client.findAllUsers());
+    console.log("Found all users");
     if (!id) {
       navigate(`/profile/${currentUser._id}/View`);
       return;

@@ -2,16 +2,34 @@ import { Button, Col, Row } from "react-bootstrap";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { User } from "../../Types/Types";
+import { setUsers } from "../../Profile/reducer";
+import * as userClient from "../../Profile/client";
 
 export default function RecipeDetails() {
+  const dispatch = useDispatch();
+  const [allUsers, setAllUsers] = useState<User[]>([]);
+  const fetchAllUsers = async () => {
+    setAllUsers(await userClient.findAllUsers());
+    console.log("Found all users");
+    // Fetch user if the user id is defined. Otherwise use
+    // the curUser
+    dispatch(setUsers(allUsers));
+  };
+  useEffect(() => {
+    fetchAllUsers();
+  }, []);
+
   const { recipeid } = useParams();
   const navigate = useNavigate();
   const { recipes } = useSelector((state: any) => state.recipesReducer);
-  const { users } = useSelector((state: any) => state.profilesReducer);
   const { currentUser } = useSelector((state: any) => state.profilesReducer);
   const recipe = recipes.find((r: any) => r._id === recipeid);
-  const recipeOwner = users.find((u:any) => u._id === recipe.owner);
+  const recipeOwner = allUsers.find((u: any) => u._id === recipe.owner);
+  console.log("recipeOwner = ");
+  console.log(recipeOwner);
 
   return (
     <div id="rs-new-recipe">
@@ -37,23 +55,25 @@ export default function RecipeDetails() {
                 />
               ))}
             </div>
-            {(currentUser && (currentUser._id === recipe.owner || currentUser.role === "Admin")) && (
-              <Link
-                to={`/Feed/EditRecipe/${recipe?._id}`}
-                className="btn border-0"
-              >
-                <FaPencil
-                  style={{ cursor: "pointer", color: "blue" }}
-                  title="Edit Recipe"
-                  size={18}
-                />
-              </Link>
-            )}
+            {currentUser &&
+              (currentUser._id === recipe.owner ||
+                currentUser.role === "Admin") && (
+                <Link
+                  to={`/Feed/EditRecipe/${recipe?._id}`}
+                  className="btn border-0"
+                >
+                  <FaPencil
+                    style={{ cursor: "pointer", color: "blue" }}
+                    title="Edit Recipe"
+                    size={18}
+                  />
+                </Link>
+              )}
           </div>
           <div className="text-muted mb-0">
             uploaded by{" "}
             <Link to={`/Profile/${recipe.owner}`}>
-              {recipe.owner ?? "Unknown User"}
+              {recipeOwner?.username ?? "Unknown User"}
             </Link>
           </div>
           <div className="mb-4">
